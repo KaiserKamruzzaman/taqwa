@@ -1,0 +1,2785 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Taqwa Trading and Services LLC</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700&family=Amiri:wght@400;700&family=Aref+Ruqaa:wght@400;700&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      :root {
+        --navy: #0c2340;
+        --navy-dark: #091a30;
+        --gold: #c9a96e;
+        --gold-light: #d4b97a;
+        --gold-dark: #b8944f;
+        --dark: #1a1a2e;
+        --grey: #8c8c8c;
+        --light: #f4f6f9;
+        --white: #ffffff;
+        --text: #2c2c2c;
+        --text-light: #666;
+        --shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+        --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.12);
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "Open Sans", sans-serif;
+        color: var(--text);
+        line-height: 1.7;
+        overflow-x: hidden;
+        background: var(--white);
+      }
+
+      /* PRELOADER */
+      .preloader {
+        position: fixed;
+        inset: 0;
+        background: #060d18;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition:
+          opacity 0.6s,
+          visibility 0.6s;
+      }
+      .preloader.hidden {
+        opacity: 0;
+        visibility: hidden;
+      }
+      .preloader-logo {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 20px;
+        animation: preloaderPulse 1.5s ease-in-out infinite;
+      }
+      @keyframes preloaderPulse {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        50% {
+          transform: scale(1.05);
+          opacity: 0.7;
+        }
+      }
+      .preloader-bar {
+        width: 200px;
+        height: 2px;
+        background: rgba(201, 169, 110, 0.15);
+        border-radius: 2px;
+        overflow: hidden;
+      }
+      .preloader-bar::after {
+        content: "";
+        display: block;
+        width: 40%;
+        height: 100%;
+        background: var(--gold);
+        border-radius: 2px;
+        animation: preloaderSlide 1.2s ease-in-out infinite;
+      }
+      @keyframes preloaderSlide {
+        0% {
+          transform: translateX(-100%);
+        }
+        100% {
+          transform: translateX(350%);
+        }
+      }
+
+      /* NAVBAR */
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        transition: all 0.4s ease;
+        padding: 16px 0;
+      }
+      .navbar.scrolled {
+        background: rgba(6, 13, 24, 0.97);
+        backdrop-filter: blur(20px);
+        padding: 8px 0;
+        box-shadow: 0 2px 30px rgba(0, 0, 0, 0.2);
+      }
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .nav-logo {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        text-decoration: none;
+      }
+      .nav-logo-img {
+        height: 48px;
+        width: auto;
+        transition: height 0.3s;
+      }
+      .navbar.scrolled .nav-logo-img {
+        height: 40px;
+      }
+      .nav-logo-text {
+        font-family: "Playfair Display", serif;
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--gold);
+        letter-spacing: 0.3px;
+        line-height: 1.3;
+      }
+      .nav-logo-text span {
+        display: block;
+        font-family: "Aref Ruqaa", serif;
+        font-size: 12px;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.5);
+        letter-spacing: 0.5px;
+      }
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        list-style: none;
+      }
+      .nav-links a {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 0.3px;
+        transition: all 0.3s;
+        position: relative;
+        padding: 4px 0;
+      }
+      .nav-links a:hover {
+        color: var(--gold);
+      }
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 1.5px;
+        background: var(--gold);
+        transition: width 0.3s;
+      }
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+      .nav-cta {
+        background: transparent !important;
+        color: rgba(255, 255, 255, 0.8) !important;
+        padding: 14px 34px;
+        border-radius: 8px;
+        font-weight: 600 !important;
+        letter-spacing: 0.3px;
+        border: 1.5px solid rgba(255, 255, 255, 0.2) !important;
+        transition: all 0.3s;
+        margin-left: 8px;
+      }
+      .nav-cta::after {
+        display: none !important;
+      }
+      .nav-cta:hover {
+        border-color: var(--gold) !important;
+        color: var(--gold) !important;
+        background: rgba(201, 169, 110, 0.05) !important;
+      }
+      .mobile-toggle {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        padding: 5px;
+        background: none;
+        border: none;
+      }
+      .mobile-toggle span {
+        width: 24px;
+        height: 2px;
+        background: var(--white);
+        transition: all 0.3s;
+        display: block;
+      }
+
+      /* HERO */
+      .hero {
+        min-height: 100vh;
+        background: linear-gradient(
+          160deg,
+          #000 0%,
+          #060d18 30%,
+          var(--navy) 60%,
+          #1a3a5c 100%
+        );
+        display: flex;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-bg-pattern {
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(
+          rgba(201, 169, 110, 0.03) 1px,
+          transparent 1px
+        );
+        background-size: 40px 40px;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        width: 900px;
+        height: 900px;
+        border: 1px solid rgba(201, 169, 110, 0.04);
+        border-radius: 50%;
+        top: -350px;
+        right: -250px;
+        animation: heroFloat 30s ease-in-out infinite;
+      }
+      .hero::after {
+        content: "";
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        border: 1px solid rgba(201, 169, 110, 0.03);
+        border-radius: 50%;
+        bottom: -200px;
+        left: -150px;
+        animation: heroFloat 25s ease-in-out infinite reverse;
+      }
+      @keyframes heroFloat {
+        0%,
+        100% {
+          transform: translate(0, 0) rotate(0deg);
+        }
+        33% {
+          transform: translate(20px, 15px) rotate(2deg);
+        }
+        66% {
+          transform: translate(-15px, 10px) rotate(-2deg);
+        }
+      }
+      .hero-glow {
+        position: absolute;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(
+          circle,
+          rgba(201, 169, 110, 0.06),
+          transparent 70%
+        );
+        top: 20%;
+        left: 30%;
+        pointer-events: none;
+      }
+      .hero-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 40px;
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        align-items: center;
+        gap: 60px;
+        position: relative;
+        z-index: 2;
+        width: 100%;
+      }
+      .hero-content {
+        color: var(--white);
+      }
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(201, 169, 110, 0.1);
+        border: 1px solid rgba(201, 169, 110, 0.2);
+        padding: 8px 22px;
+        border-radius: 30px;
+        font-size: 11px;
+        color: var(--gold);
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        font-weight: 600;
+        margin-bottom: 28px;
+        backdrop-filter: blur(8px);
+      }
+      .hero-badge .dot {
+        width: 7px;
+        height: 7px;
+        background: var(--gold);
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+        box-shadow: 0 0 8px rgba(201, 169, 110, 0.4);
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.4;
+          transform: scale(0.8);
+        }
+      }
+      .hero h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 50px;
+        line-height: 1.15;
+        font-weight: 800;
+        margin-bottom: 10px;
+        letter-spacing: -0.5px;
+      }
+      .hero h1 .gold {
+        color: var(--gold);
+        position: relative;
+      }
+      .hero-arabic {
+        font-family: "Aref Ruqaa", serif;
+        font-size: 28px;
+        color: rgba(255, 255, 255, 0.45);
+        direction: rtl;
+        margin-bottom: 22px;
+      }
+      .hero p {
+        font-size: 15.5px;
+        color: rgba(255, 255, 255, 0.65);
+        line-height: 1.85;
+        max-width: 520px;
+        margin-bottom: 36px;
+      }
+      .hero-btns {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+      .btn-primary {
+        background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+        color: var(--navy);
+        padding: 15px 36px;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s;
+        text-decoration: none;
+        letter-spacing: 0.5px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(201, 169, 110, 0.3);
+      }
+      .btn-outline {
+        border: 1.5px solid rgba(255, 255, 255, 0.2);
+        color: var(--white);
+        padding: 15px 36px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        text-decoration: none;
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(4px);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .btn-outline:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+        background: rgba(201, 169, 110, 0.05);
+      }
+      .hero-visual {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .hero-logo-showcase {
+        position: relative;
+        width: 100%;
+        max-width: 380px;
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .hero-logo-ring {
+        position: absolute;
+        inset: 0;
+        border: 1px solid rgba(201, 169, 110, 0.08);
+        border-radius: 50%;
+        animation: ringRotate 40s linear infinite;
+      }
+      .hero-logo-ring2 {
+        position: absolute;
+        inset: 30px;
+        border: 1px dashed rgba(201, 169, 110, 0.06);
+        border-radius: 50%;
+        animation: ringRotate 30s linear infinite reverse;
+      }
+      @keyframes ringRotate {
+        from {
+          transform: rotate(0);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .hero-logo-center {
+        width: 220px;
+        height: 220px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(201, 169, 110, 0.08),
+          transparent 70%
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 2;
+      }
+      .hero-logo-center img {
+        width: 190px;
+        height: auto;
+        filter: drop-shadow(0 10px 40px rgba(201, 169, 110, 0.2));
+      }
+      .hero-logo-placeholder {
+        width: 190px;
+        height: 190px;
+        border: 2px solid rgba(201, 169, 110, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        color: var(--gold);
+        font-family: "Playfair Display", serif;
+      }
+      .hero-logo-placeholder .hlp-t {
+        font-size: 48px;
+        font-weight: 800;
+        line-height: 1;
+      }
+      .hero-logo-placeholder .hlp-s {
+        font-size: 9px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        opacity: 0.6;
+        margin-top: 4px;
+      }
+      .hero-float-tag {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(201, 169, 110, 0.12);
+        border-radius: 12px;
+        padding: 12px 18px;
+        color: var(--white);
+        font-size: 12px;
+        white-space: nowrap;
+        z-index: 3;
+      }
+      .hero-float-tag .hft-icon {
+        font-size: 18px;
+        margin-bottom: 4px;
+        display: block;
+      }
+      .hero-float-tag .hft-label {
+        color: var(--gold);
+        font-weight: 700;
+        font-size: 11px;
+        letter-spacing: 0.5px;
+      }
+      .hft-1 {
+        top: 15%;
+        left: -10%;
+        animation: floatTag1 6s ease-in-out infinite;
+      }
+      .hft-2 {
+        top: 10%;
+        right: -5%;
+        animation: floatTag2 7s ease-in-out infinite;
+      }
+      .hft-3 {
+        bottom: 20%;
+        left: -5%;
+        animation: floatTag3 5.5s ease-in-out infinite;
+      }
+      .hft-4 {
+        bottom: 10%;
+        right: -10%;
+        animation: floatTag1 6.5s ease-in-out infinite 0.5s;
+      }
+      @keyframes floatTag1 {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-12px);
+        }
+      }
+      @keyframes floatTag2 {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+      @keyframes floatTag3 {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-14px);
+        }
+      }
+      .hero-stats {
+        display: flex;
+        gap: 36px;
+        margin-top: 44px;
+        padding-top: 28px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .hero-stat .num {
+        font-family: "Playfair Display", serif;
+        font-size: 34px;
+        font-weight: 800;
+        color: var(--gold);
+      }
+      .hero-stat .label {
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.4);
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-top: 2px;
+      }
+
+      /* SECTIONS COMMON */
+      section {
+        padding: 100px 0;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 40px;
+      }
+      .section-header {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+      .section-tag {
+        display: inline-block;
+        background: rgba(12, 35, 64, 0.05);
+        color: var(--navy);
+        font-size: 10.5px;
+        font-weight: 700;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        padding: 8px 22px;
+        border-radius: 30px;
+        margin-bottom: 16px;
+      }
+      .section-header h2 {
+        font-family: "Playfair Display", serif;
+        font-size: 38px;
+        color: var(--navy);
+        margin-bottom: 10px;
+        letter-spacing: -0.3px;
+      }
+      .section-header h2 .gold {
+        color: var(--gold);
+      }
+      .section-header p {
+        font-size: 15px;
+        color: var(--text-light);
+        max-width: 580px;
+        margin: 0 auto;
+        line-height: 1.8;
+      }
+      .gold-line-center {
+        width: 50px;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--gold),
+          transparent
+        );
+        margin: 14px auto;
+      }
+
+      /* ABOUT */
+      .about {
+        background: var(--white);
+        position: relative;
+      }
+      .about::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 40%;
+        height: 100%;
+        background: var(--light);
+        z-index: 0;
+      }
+      .about .container {
+        position: relative;
+        z-index: 1;
+      }
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 70px;
+        align-items: center;
+      }
+      .about-image {
+        position: relative;
+      }
+      .about-img-main {
+        width: 100%;
+        border-radius: 20px;
+        background: linear-gradient(160deg, #060d18, var(--navy), #1a3a5c);
+        height: 440px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 30px 60px rgba(12, 35, 64, 0.2);
+      }
+      .about-img-main::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          circle at 30% 40%,
+          rgba(201, 169, 110, 0.1),
+          transparent 60%
+        );
+      }
+      .about-img-main::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(
+          rgba(201, 169, 110, 0.04) 1px,
+          transparent 1px
+        );
+        background-size: 30px 30px;
+      }
+      .about-img-inner {
+        text-align: center;
+        color: var(--white);
+        position: relative;
+        z-index: 1;
+      }
+      .about-img-inner .about-logo-img {
+        width: 160px;
+        height: auto;
+        filter: drop-shadow(0 8px 30px rgba(201, 169, 110, 0.3));
+        margin-bottom: 16px;
+      }
+      .about-img-inner .big-text {
+        font-family: "Playfair Display", serif;
+        font-size: 56px;
+        font-weight: 800;
+        color: var(--gold);
+        line-height: 1;
+      }
+      .about-img-inner .sub-text {
+        font-size: 13px;
+        opacity: 0.5;
+        margin-top: 10px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+      }
+      .about-float-card {
+        position: absolute;
+        bottom: -24px;
+        right: -24px;
+        background: var(--white);
+        border-radius: 14px;
+        padding: 22px 26px;
+        box-shadow: var(--shadow-lg);
+        border-left: 3px solid var(--gold);
+      }
+      .about-float-card h5 {
+        font-size: 13px;
+        color: var(--navy);
+        margin-bottom: 2px;
+        font-weight: 700;
+      }
+      .about-float-card p {
+        font-size: 12px;
+        color: var(--text-light);
+      }
+      .about-float-card2 {
+        position: absolute;
+        top: 20px;
+        left: -20px;
+        background: var(--white);
+        border-radius: 14px;
+        padding: 16px 20px;
+        box-shadow: var(--shadow-lg);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .about-float-card2 .afc-icon {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+      }
+      .about-float-card2 .afc-text {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--navy);
+      }
+      .about-float-card2 .afc-sub {
+        font-size: 11px;
+        color: var(--text-light);
+        font-weight: 400;
+      }
+      .about-content h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 32px;
+        color: var(--navy);
+        margin-bottom: 20px;
+        line-height: 1.3;
+      }
+      .about-content h3 .gold {
+        color: var(--gold);
+      }
+      .about-content > p {
+        font-size: 14.5px;
+        color: var(--text-light);
+        margin-bottom: 14px;
+        line-height: 1.85;
+      }
+      .about-features {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-top: 28px;
+      }
+      .about-feature {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 14px;
+        border-radius: 12px;
+        transition: background 0.3s;
+      }
+      .about-feature:hover {
+        background: var(--light);
+      }
+      .about-feature .icon {
+        width: 42px;
+        height: 42px;
+        background: linear-gradient(
+          135deg,
+          rgba(12, 35, 64, 0.08),
+          rgba(201, 169, 110, 0.1)
+        );
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 18px;
+      }
+      .about-feature .feat-text h5 {
+        font-size: 13px;
+        color: var(--navy);
+        font-weight: 700;
+        margin-bottom: 2px;
+      }
+      .about-feature .feat-text p {
+        font-size: 12px;
+        color: var(--text-light);
+      }
+
+      /* VISION MISSION */
+      .vm-section {
+        background: linear-gradient(
+          160deg,
+          #000,
+          #060d18 30%,
+          var(--navy) 60%,
+          #1a3a5c
+        );
+        color: var(--white);
+        position: relative;
+        overflow: hidden;
+      }
+      .vm-section::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(
+          rgba(201, 169, 110, 0.02) 1px,
+          transparent 1px
+        );
+        background-size: 40px 40px;
+      }
+      .vm-section::after {
+        content: "";
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        border: 1px solid rgba(201, 169, 110, 0.04);
+        border-radius: 50%;
+        top: -200px;
+        right: -200px;
+      }
+      .vm-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        position: relative;
+        z-index: 1;
+      }
+      .vm-card {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(201, 169, 110, 0.1);
+        border-radius: 20px;
+        padding: 44px 38px;
+        transition: all 0.4s;
+      }
+      .vm-card:hover {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(201, 169, 110, 0.2);
+        transform: translateY(-4px);
+      }
+      .vm-card .vm-icon {
+        font-size: 32px;
+        margin-bottom: 16px;
+      }
+      .vm-card .vm-label {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 14px;
+      }
+      .vm-card h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 24px;
+        margin-bottom: 16px;
+        line-height: 1.35;
+      }
+      .vm-card p {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.6);
+        line-height: 1.9;
+      }
+
+      /* DIVISIONS / SERVICES */
+      .divisions {
+        background: var(--light);
+        position: relative;
+      }
+      .div-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 22px;
+      }
+      .div-card {
+        background: var(--white);
+        border-radius: 20px;
+        padding: 34px 26px;
+        transition: all 0.4s;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(0, 0, 0, 0.03);
+      }
+      .div-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(90deg, var(--gold), var(--gold-dark));
+        transform: scaleX(0);
+        transition: transform 0.4s;
+        transform-origin: left;
+      }
+      .div-card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-lg);
+      }
+      .div-card:hover::before {
+        transform: scaleX(1);
+      }
+      .div-card .card-num {
+        font-family: "Playfair Display", serif;
+        font-size: 52px;
+        font-weight: 800;
+        color: rgba(12, 35, 64, 0.04);
+        position: absolute;
+        top: 14px;
+        right: 18px;
+        line-height: 1;
+      }
+      .div-card .card-icon-wrap {
+        width: 58px;
+        height: 58px;
+        background: linear-gradient(135deg, var(--navy), #1a3a5c);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        margin-bottom: 20px;
+        box-shadow: 0 8px 20px rgba(12, 35, 64, 0.15);
+      }
+      .div-card h4 {
+        font-family: "Playfair Display", serif;
+        font-size: 17px;
+        color: var(--navy);
+        margin-bottom: 8px;
+      }
+      .div-card .card-status {
+        display: inline-block;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        padding: 4px 14px;
+        border-radius: 20px;
+        margin-bottom: 14px;
+      }
+      .status-active {
+        background: rgba(26, 122, 58, 0.08);
+        color: #1a7a3a;
+      }
+      .status-upcoming {
+        background: rgba(201, 169, 110, 0.12);
+        color: #b0855a;
+      }
+      .status-planned {
+        background: rgba(12, 35, 64, 0.06);
+        color: var(--navy);
+      }
+      .div-card p {
+        font-size: 13px;
+        color: var(--text-light);
+        line-height: 1.75;
+        margin-bottom: 14px;
+      }
+      .div-card ul {
+        list-style: none;
+        padding: 0;
+      }
+      .div-card ul li {
+        font-size: 12.5px;
+        color: var(--text-light);
+        padding: 4px 0 4px 18px;
+        position: relative;
+      }
+      .div-card ul li::before {
+        content: "▸";
+        position: absolute;
+        left: 0;
+        color: var(--gold);
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      /* VALUES */
+      .values {
+        background: var(--white);
+      }
+      .values-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+      }
+      .val-card {
+        text-align: center;
+        padding: 40px 26px;
+        border-radius: 20px;
+        border: 1px solid rgba(0, 0, 0, 0.03);
+        transition: all 0.4s;
+        position: relative;
+        overflow: hidden;
+      }
+      .val-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(12, 35, 64, 0.02),
+          rgba(201, 169, 110, 0.04)
+        );
+        opacity: 0;
+        transition: opacity 0.4s;
+      }
+      .val-card:hover {
+        box-shadow: var(--shadow-lg);
+        transform: translateY(-6px);
+        border-color: rgba(201, 169, 110, 0.15);
+      }
+      .val-card:hover::after {
+        opacity: 1;
+      }
+      .val-card > * {
+        position: relative;
+        z-index: 1;
+      }
+      .val-card .val-icon {
+        width: 68px;
+        height: 68px;
+        margin: 0 auto 20px;
+        background: linear-gradient(
+          135deg,
+          rgba(12, 35, 64, 0.06),
+          rgba(201, 169, 110, 0.08)
+        );
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        transition: transform 0.3s;
+      }
+      .val-card:hover .val-icon {
+        transform: scale(1.08);
+      }
+      .val-card h4 {
+        font-family: "Playfair Display", serif;
+        font-size: 17px;
+        color: var(--navy);
+        margin-bottom: 8px;
+      }
+      .val-card p {
+        font-size: 13px;
+        color: var(--text-light);
+        line-height: 1.75;
+      }
+
+      /* MARKET */
+      .market {
+        background: var(--light);
+      }
+      .market-stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 22px;
+        margin-bottom: 50px;
+      }
+      .m-stat {
+        text-align: center;
+        background: var(--white);
+        padding: 38px 20px;
+        border-radius: 20px;
+        border: 1px solid rgba(0, 0, 0, 0.03);
+        transition: all 0.3s;
+      }
+      .m-stat:hover {
+        box-shadow: var(--shadow);
+        transform: translateY(-4px);
+      }
+      .m-stat .m-num {
+        font-family: "Playfair Display", serif;
+        font-size: 44px;
+        font-weight: 800;
+        color: var(--navy);
+        line-height: 1;
+      }
+      .m-stat .m-num .gold {
+        color: var(--gold);
+      }
+      .m-stat .m-label {
+        font-size: 13px;
+        color: var(--text-light);
+        margin-top: 8px;
+      }
+      .audience-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 16px;
+      }
+      .aud-card {
+        text-align: center;
+        padding: 30px 16px;
+        background: var(--white);
+        border-radius: 16px;
+        border: 1px solid rgba(0, 0, 0, 0.03);
+        transition: all 0.3s;
+      }
+      .aud-card:hover {
+        border-color: var(--gold);
+        transform: translateY(-4px);
+        box-shadow: var(--shadow);
+      }
+      .aud-card .aud-icon {
+        font-size: 30px;
+        margin-bottom: 12px;
+      }
+      .aud-card h5 {
+        font-size: 13px;
+        color: var(--navy);
+        margin-bottom: 4px;
+      }
+      .aud-card p {
+        font-size: 11.5px;
+        color: var(--text-light);
+        line-height: 1.5;
+      }
+
+      /* TIMELINE */
+      .timeline-section {
+        background: var(--white);
+      }
+      .tl-track {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .tl-line {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(
+          to bottom,
+          var(--gold),
+          var(--navy),
+          var(--gold)
+        );
+        transform: translateX(-50%);
+      }
+      .tl-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 36px;
+        position: relative;
+      }
+      .tl-item:nth-child(odd) {
+        flex-direction: row-reverse;
+        text-align: right;
+      }
+      .tl-item:nth-child(odd) .tl-content {
+        padding-right: 50px;
+        padding-left: 0;
+      }
+      .tl-item:nth-child(even) .tl-content {
+        padding-left: 50px;
+      }
+      .tl-content {
+        width: 50%;
+      }
+      .tl-dot {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 42px;
+        height: 42px;
+        background: var(--navy);
+        border: 3px solid var(--gold);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--gold);
+        font-size: 11px;
+        font-weight: 800;
+        z-index: 2;
+        box-shadow: 0 4px 15px rgba(12, 35, 64, 0.2);
+      }
+      .tl-card {
+        background: var(--light);
+        border-radius: 14px;
+        padding: 24px 22px;
+        border: 1px solid rgba(0, 0, 0, 0.04);
+        transition: all 0.3s;
+      }
+      .tl-card:hover {
+        box-shadow: var(--shadow);
+        transform: translateX(4px);
+      }
+      .tl-item:nth-child(odd) .tl-card:hover {
+        transform: translateX(-4px);
+      }
+      .tl-card h4 {
+        font-family: "Playfair Display", serif;
+        font-size: 15px;
+        color: var(--navy);
+        margin-bottom: 6px;
+      }
+      .tl-card p {
+        font-size: 12.5px;
+        color: var(--text-light);
+        line-height: 1.7;
+      }
+
+      /* TEAM */
+      .team {
+        background: var(--light);
+      }
+      .team-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 28px;
+      }
+      .team-card {
+        background: var(--white);
+        border-radius: 20px;
+        padding: 40px 28px;
+        text-align: center;
+        border: 1px solid rgba(0, 0, 0, 0.03);
+        transition: all 0.4s;
+        position: relative;
+        overflow: hidden;
+      }
+      .team-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 80px;
+        background: linear-gradient(135deg, var(--navy), #1a3a5c);
+        border-radius: 20px 20px 0 0;
+      }
+      .team-card:hover {
+        box-shadow: var(--shadow-lg);
+        transform: translateY(-6px);
+      }
+      .team-card .team-avatar {
+        width: 84px;
+        height: 84px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+        margin: 20px auto 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Playfair Display", serif;
+        font-size: 30px;
+        font-weight: 800;
+        color: var(--navy);
+        position: relative;
+        z-index: 1;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        border: 3px solid var(--white);
+      }
+      .team-card h4 {
+        font-family: "Playfair Display", serif;
+        font-size: 17px;
+        color: var(--navy);
+        margin-bottom: 4px;
+      }
+      .team-card .team-role {
+        font-size: 12px;
+        color: var(--gold);
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        margin-bottom: 12px;
+      }
+      .team-card p {
+        font-size: 13px;
+        color: var(--text-light);
+        line-height: 1.75;
+      }
+
+      /* CONTACT */
+      .contact {
+        background: var(--white);
+      }
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+        align-items: start;
+      }
+      .contact-info h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 28px;
+        color: var(--navy);
+        margin-bottom: 16px;
+        line-height: 1.3;
+      }
+      .contact-info > p {
+        font-size: 14px;
+        color: var(--text-light);
+        margin-bottom: 30px;
+        line-height: 1.85;
+      }
+      .contact-item {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 24px;
+        align-items: flex-start;
+      }
+      .contact-item .ci-icon {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(
+          135deg,
+          rgba(12, 35, 64, 0.06),
+          rgba(201, 169, 110, 0.08)
+        );
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 20px;
+      }
+      .contact-item .ci-text h5 {
+        font-size: 13px;
+        color: var(--navy);
+        font-weight: 700;
+        margin-bottom: 3px;
+      }
+      .contact-item .ci-text p {
+        font-size: 13px;
+        color: var(--text-light);
+        line-height: 1.6;
+      }
+      .contact-form {
+        background: var(--light);
+        border-radius: 20px;
+        padding: 40px;
+        border: 1px solid rgba(0, 0, 0, 0.04);
+      }
+      .contact-form h4 {
+        font-family: "Playfair Display", serif;
+        font-size: 20px;
+        color: var(--navy);
+        margin-bottom: 6px;
+      }
+      .contact-form .form-sub {
+        font-size: 13px;
+        color: var(--text-light);
+        margin-bottom: 24px;
+      }
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        margin-bottom: 14px;
+      }
+      .form-group {
+        margin-bottom: 14px;
+      }
+      .form-group label {
+        display: block;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--navy);
+        margin-bottom: 6px;
+        letter-spacing: 0.3px;
+      }
+      .form-group input,
+      .form-group textarea,
+      .form-group select {
+        width: 100%;
+        padding: 13px 16px;
+        border: 1.5px solid #e0e2e6;
+        border-radius: 10px;
+        font-family: "Open Sans", sans-serif;
+        font-size: 13px;
+        transition: all 0.3s;
+        background: var(--white);
+        color: var(--text);
+      }
+      .form-group input:focus,
+      .form-group textarea:focus,
+      .form-group select:focus {
+        outline: none;
+        border-color: var(--gold);
+        box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.1);
+      }
+      .form-group textarea {
+        resize: vertical;
+        min-height: 100px;
+      }
+      .form-submit {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(135deg, var(--navy), #1a3a5c);
+        color: var(--white);
+        border: none;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s;
+        letter-spacing: 0.5px;
+      }
+      .form-submit:hover {
+        box-shadow: 0 8px 25px rgba(12, 35, 64, 0.3);
+        transform: translateY(-2px);
+      }
+
+      /* CTA BANNER */
+      .cta-banner {
+        background: linear-gradient(160deg, #000, var(--navy) 50%, #1a3a5c);
+        padding: 90px 0;
+        text-align: center;
+        color: var(--white);
+        position: relative;
+        overflow: hidden;
+      }
+      .cta-banner::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(
+          rgba(201, 169, 110, 0.03) 1px,
+          transparent 1px
+        );
+        background-size: 40px 40px;
+      }
+      .cta-banner .container {
+        position: relative;
+        z-index: 1;
+      }
+      .cta-banner h2 {
+        font-family: "Playfair Display", serif;
+        font-size: 38px;
+        margin-bottom: 14px;
+      }
+      .cta-banner p {
+        font-size: 15px;
+        opacity: 0.6;
+        margin-bottom: 30px;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      /* FOOTER */
+      .footer {
+        background: #060d18;
+        color: var(--white);
+        padding: 70px 0 0;
+      }
+      .footer-top {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin-bottom: 50px;
+        text-align: center;
+        padding-bottom: 40px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .footer-top-logo {
+        height: 60px;
+        margin-bottom: 12px;
+        filter: brightness(1.1);
+      }
+      .footer-top-placeholder {
+        font-family: "Playfair Display", serif;
+        font-size: 24px;
+        color: var(--gold);
+        font-weight: 800;
+        margin-bottom: 4px;
+      }
+      .footer-top .ft-arabic {
+        font-family: "Amiri", serif;
+        font-size: 16px;
+        color: rgba(255, 255, 255, 0.3);
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 40px;
+        margin-bottom: 40px;
+      }
+      .footer-brand p {
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.4);
+        line-height: 1.85;
+      }
+      .footer-col h5 {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--gold);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 18px;
+      }
+      .footer-col a {
+        display: block;
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.4);
+        text-decoration: none;
+        margin-bottom: 12px;
+        transition: all 0.3s;
+      }
+      .footer-col a:hover {
+        color: var(--gold);
+        padding-left: 4px;
+      }
+      .footer-social {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+      }
+      .footer-social a {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.05);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(255, 255, 255, 0.4);
+        text-decoration: none;
+        font-size: 14px;
+        transition: all 0.3s;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .footer-social a:hover {
+        background: var(--gold);
+        color: var(--navy);
+        border-color: var(--gold);
+        padding: 0;
+      }
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        padding: 22px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .footer-bottom p {
+        font-size: 11.5px;
+        color: rgba(255, 255, 255, 0.3);
+      }
+
+      /* WHATSAPP FLOAT */
+      .whatsapp-float {
+        position: fixed;
+        bottom: 28px;
+        right: 28px;
+        z-index: 998;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .whatsapp-float .wa-tooltip {
+        background: var(--white);
+        color: var(--text);
+        font-size: 12px;
+        font-weight: 600;
+        padding: 8px 16px;
+        border-radius: 8px;
+        box-shadow: var(--shadow-lg);
+        opacity: 0;
+        transform: translateX(10px);
+        transition: all 0.3s;
+        pointer-events: none;
+        white-space: nowrap;
+      }
+      .whatsapp-float:hover .wa-tooltip {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      .wa-btn {
+        width: 56px;
+        height: 56px;
+        background: #25d366;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
+        transition: all 0.3s;
+        cursor: pointer;
+        text-decoration: none;
+      }
+      .wa-btn:hover {
+        transform: scale(1.08);
+        box-shadow: 0 8px 30px rgba(37, 211, 102, 0.45);
+      }
+      .wa-btn svg {
+        width: 28px;
+        height: 28px;
+        fill: white;
+      }
+
+      /* SCROLL ANIMATIONS */
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .reveal-left {
+        opacity: 0;
+        transform: translateX(-40px);
+        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      .reveal-left.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      .reveal-right {
+        opacity: 0;
+        transform: translateX(40px);
+        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      .reveal-right.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      .reveal-scale {
+        opacity: 0;
+        transform: scale(0.9);
+        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      .reveal-scale.visible {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      /* BACK TO TOP */
+      .back-top {
+        position: fixed;
+        bottom: 100px;
+        right: 32px;
+        width: 44px;
+        height: 44px;
+        background: var(--navy);
+        color: var(--gold);
+        border: 1.5px solid rgba(201, 169, 110, 0.2);
+        border-radius: 12px;
+        font-size: 16px;
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s;
+        z-index: 997;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      }
+      .back-top.show {
+        opacity: 1;
+        visibility: visible;
+      }
+      .back-top:hover {
+        background: var(--gold);
+        color: var(--navy);
+        border-color: var(--gold);
+        transform: translateY(-3px);
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 1024px) {
+        .hero-container {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+        .hero p {
+          margin: 0 auto 36px;
+        }
+        .hero-btns {
+          justify-content: center;
+        }
+        .hero-visual {
+          display: none;
+        }
+        .hero-stats {
+          justify-content: center;
+        }
+        .about::before {
+          display: none;
+        }
+        .about-grid {
+          grid-template-columns: 1fr;
+        }
+        .div-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .market-stats {
+          grid-template-columns: 1fr 1fr;
+        }
+        .audience-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .footer-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100vh;
+          background: rgba(6, 13, 24, 0.98);
+          backdrop-filter: blur(20px);
+          flex-direction: column;
+          justify-content: center;
+          gap: 24px;
+          text-align: center;
+          z-index: 1001;
+        }
+        .nav-links.open {
+          display: flex;
+        }
+        .nav-links a {
+          font-size: 18px;
+          color: var(--white);
+        }
+        .mobile-toggle {
+          display: flex;
+          z-index: 1002;
+        }
+        .hero {
+          min-height: 90vh;
+        }
+        .hero h1 {
+          font-size: 32px;
+        }
+        .hero-arabic {
+          font-size: 20px;
+        }
+        .hero p {
+          font-size: 14px;
+        }
+        section {
+          padding: 70px 0;
+        }
+        .section-header h2 {
+          font-size: 28px;
+        }
+        .div-grid {
+          grid-template-columns: 1fr;
+        }
+        .values-row {
+          grid-template-columns: 1fr;
+        }
+        .vm-grid {
+          grid-template-columns: 1fr;
+        }
+        .market-stats {
+          grid-template-columns: 1fr 1fr;
+        }
+        .audience-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .team-grid {
+          grid-template-columns: 1fr;
+        }
+        .contact-grid {
+          grid-template-columns: 1fr;
+        }
+        .tl-line {
+          left: 20px;
+        }
+        .tl-dot {
+          left: 20px;
+        }
+        .tl-item,
+        .tl-item:nth-child(odd) {
+          flex-direction: row;
+          text-align: left;
+        }
+        .tl-content,
+        .tl-item:nth-child(odd) .tl-content,
+        .tl-item:nth-child(even) .tl-content {
+          width: 100%;
+          padding-left: 60px;
+          padding-right: 0;
+        }
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
+        .footer-bottom {
+          flex-direction: column;
+          gap: 8px;
+          text-align: center;
+        }
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+        .about-features {
+          grid-template-columns: 1fr;
+        }
+        .about-float-card,
+        .about-float-card2 {
+          display: none;
+        }
+        .container {
+          padding: 0 20px;
+        }
+        .cta-banner h2 {
+          font-size: 26px;
+        }
+        .hero-stats {
+          flex-wrap: wrap;
+          gap: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- PRELOADER -->
+    <div class="preloader" id="preloader">
+      <img
+        src="logo.png"
+        alt="Taqwa"
+        class="preloader-logo"
+        style="width: 250px; height: auto"
+      />
+      <div class="preloader-bar"></div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+      <div class="nav-container">
+        <a href="#" class="nav-logo">
+          <img
+            src="logo.png"
+            alt="Taqwa Trading and Services LLC"
+            class="nav-logo-img"
+          />
+          <div class="nav-logo-text">
+            Taqwa Trading and Services LLC<span
+              >تقوى للتجارة والخدمات ذ.م.م</span
+            >
+          </div>
+        </a>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#about">About</a></li>
+          <li><a href="#divisions">Services</a></li>
+          <li><a href="#values">Values</a></li>
+          <li><a href="#market">Market</a></li>
+          <li><a href="#timeline">Roadmap</a></li>
+          <li><a href="#team">Team</a></li>
+          <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+        </ul>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="hero-bg-pattern"></div>
+      <div class="hero-glow"></div>
+      <div class="hero-container">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span class="dot"></span> Now Open in Riyadh, KSA
+          </div>
+          <h1>
+            Building a <span class="gold">Trusted</span> Multi-Service Brand
+            Across Saudi Arabia
+          </h1>
+          <div class="hero-arabic">تقوى للتجارة والخدمات ذ.م.م</div>
+          <p>
+            From authentic traditional dining to hospitality and travel — Taqwa
+            delivers excellence in Food & Beverage, Hotels, and Tourism services
+            throughout the Kingdom.
+          </p>
+          <div class="hero-btns">
+            <a href="#divisions" class="btn-primary">Explore Our Services →</a>
+            <a href="#contact" class="btn-outline">Get in Touch</a>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <div class="num" data-count="4">0</div>
+              <div class="label">Business Divisions</div>
+            </div>
+            <div class="hero-stat">
+              <div class="num" data-count="6">0</div>
+              <div class="label">Target Cities</div>
+            </div>
+            <div class="hero-stat">
+              <div class="num">2026</div>
+              <div class="label">Established</div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-logo-showcase">
+            <div class="hero-logo-ring"></div>
+            <div class="hero-logo-ring2"></div>
+            <div class="hero-logo-center">
+              <!-- LOGO: Replace with <img src="YOUR_LOGO_URL" alt="Taqwa" style="width:190px;height:auto"> -->
+              <div class="hero-logo-placeholder">
+                <div
+                  class="hlp-t"
+                  style="font-family: &quot;Aref Ruqaa&quot;, serif"
+                >
+                  تقوى
+                </div>
+                <div class="hlp-s">Trading & Services</div>
+              </div>
+            </div>
+            <div class="hero-float-tag hft-1">
+              <span class="hft-icon">🍽️</span
+              ><span class="hft-label">Restaurant</span>
+            </div>
+            <div class="hero-float-tag hft-2">
+              <span class="hft-icon">☕</span
+              ><span class="hft-label">Coffee & Juice</span>
+            </div>
+            <div class="hero-float-tag hft-3">
+              <span class="hft-icon">🏨</span
+              ><span class="hft-label">Hotels</span>
+            </div>
+            <div class="hero-float-tag hft-4">
+              <span class="hft-icon">✈️</span
+              ><span class="hft-label">Travel</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about" id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-image reveal-left">
+            <div class="about-img-main">
+              <div class="about-img-inner">
+                <!-- LOGO: Replace with <img src="YOUR_LOGO_URL" alt="Taqwa" class="about-logo-img"> -->
+                <div
+                  class="big-text"
+                  style="font-family: &quot;Aref Ruqaa&quot;, serif"
+                >
+                  تقوى
+                </div>
+                <div class="sub-text">Est. 2026 — Riyadh, KSA</div>
+              </div>
+            </div>
+            <div class="about-float-card">
+              <h5>CR Number</h5>
+              <p>7053869819</p>
+            </div>
+            <div class="about-float-card2">
+              <div class="afc-icon">✓</div>
+              <div>
+                <div class="afc-text">VAT Registered</div>
+                <div class="afc-sub">ZATCA Compliant</div>
+              </div>
+            </div>
+          </div>
+          <div class="about-content reveal-right">
+            <div class="section-tag">About Us</div>
+            <h3>
+              A New Standard of <span class="gold">Quality & Trust</span> in
+              Saudi Arabia
+            </h3>
+            <p>
+              Taqwa Trading and Services LLC Company is a Saudi-registered
+              limited liability company headquartered in Al Aqeeq District,
+              Riyadh. Founded with a clear vision to build a diversified
+              business spanning Food & Beverage, Hospitality & Hotels, and
+              Travel & Tourism.
+            </p>
+            <p>
+              Our phased growth strategy ensures sustainable expansion across
+              multiple cities while maintaining the highest standards of quality
+              and customer satisfaction aligned with Saudi Vision 2030.
+            </p>
+            <div class="about-features">
+              <div class="about-feature">
+                <div class="icon">🏢</div>
+                <div class="feat-text">
+                  <h5>Saudi Registered LLC</h5>
+                  <p>Fully compliant entity</p>
+                </div>
+              </div>
+              <div class="about-feature">
+                <div class="icon">📍</div>
+                <div class="feat-text">
+                  <h5>HQ in Riyadh</h5>
+                  <p>Al Aqeeq District</p>
+                </div>
+              </div>
+              <div class="about-feature">
+                <div class="icon">🕌</div>
+                <div class="feat-text">
+                  <h5>100% Halal</h5>
+                  <p>Shariah compliant</p>
+                </div>
+              </div>
+              <div class="about-feature">
+                <div class="icon">📈</div>
+                <div class="feat-text">
+                  <h5>4 Divisions</h5>
+                  <p>Multi-sector growth</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISION & MISSION -->
+    <section class="vm-section">
+      <div class="container">
+        <div class="section-header" style="margin-bottom: 40px">
+          <div
+            class="section-tag"
+            style="background: rgba(201, 169, 110, 0.1); color: #c9a96e"
+          >
+            Our Purpose
+          </div>
+          <h2 style="color: #fff">
+            Guided by <span class="gold">Vision</span> &
+            <span class="gold">Mission</span>
+          </h2>
+          <div class="gold-line-center"></div>
+        </div>
+        <div class="vm-grid">
+          <div class="vm-card reveal-left">
+            <div class="vm-icon">🔭</div>
+            <div class="vm-label">Our Vision</div>
+            <h3>Leading Multi-Service Brand</h3>
+            <p>
+              To become a leading and trusted multi-service brand across the
+              Kingdom of Saudi Arabia — recognized for delivering exceptional
+              food, beverage, hospitality, and travel experiences that enrich
+              the daily lives of our community and visitors.
+            </p>
+          </div>
+          <div class="vm-card reveal-right">
+            <div class="vm-icon">🎯</div>
+            <div class="vm-label">Our Mission</div>
+            <h3>Excellence Under One Brand</h3>
+            <p>
+              To serve our customers with fresh, high-quality food and
+              beverages, authentic traditional dining, premium hotel
+              accommodations, and comprehensive travel solutions — including
+              Hajj & Umrah services — delivered with integrity and a commitment
+              to excellence.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DIVISIONS -->
+    <section class="divisions" id="divisions">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">What We Do</div>
+          <h2>Our Business <span class="gold">Divisions</span></h2>
+          <div class="gold-line-center"></div>
+          <p>
+            A strategic four-phase expansion model delivering sustainable growth
+            and operational excellence across the Kingdom.
+          </p>
+        </div>
+        <div class="div-grid">
+          <div class="div-card reveal">
+            <div class="card-num">01</div>
+            <div class="card-icon-wrap">🍽️</div>
+            <h4>Traditional Restaurant</h4>
+            <span class="card-status status-active">● Now Open</span>
+            <p>
+              Full-service restaurant featuring authentic traditional meals,
+              fresh juices, and specialty coffee in Riyadh.
+            </p>
+            <ul>
+              <li>Kabsa, Mandi, Madhbi & Hanith</li>
+              <li>Family-friendly dining</li>
+              <li>Fresh juice bar & coffee</li>
+              <li>Catering & delivery services</li>
+            </ul>
+          </div>
+          <div class="div-card reveal">
+            <div class="card-num">02</div>
+            <div class="card-icon-wrap">🧃</div>
+            <h4>Juice & Coffee Outlets</h4>
+            <span class="card-status status-upcoming">◐ Upcoming</span>
+            <p>
+              Vibrant takeaway and dine-in outlets across key locations in Saudi
+              Arabia.
+            </p>
+            <ul>
+              <li>Fresh juices & smoothies</li>
+              <li>Arabic & international coffee</li>
+              <li>Roasted corn & snacks</li>
+              <li>High-footfall locations</li>
+            </ul>
+          </div>
+          <div class="div-card reveal">
+            <div class="card-num">03</div>
+            <div class="card-icon-wrap">🏨</div>
+            <h4>Hotel & Hospitality</h4>
+            <span class="card-status status-planned">○ Planned</span>
+            <p>
+              Hotel properties for business travelers, tourists, and Hajj &
+              Umrah pilgrims.
+            </p>
+            <ul>
+              <li>Budget to premium rooms</li>
+              <li>In-house Taqwa dining</li>
+              <li>Pilgrim accommodation</li>
+              <li>Corporate event facilities</li>
+            </ul>
+          </div>
+          <div class="div-card reveal">
+            <div class="card-num">04</div>
+            <div class="card-icon-wrap">✈️</div>
+            <h4>Travel & Tourism</h4>
+            <span class="card-status status-planned">○ Planned</span>
+            <p>
+              End-to-end travel solutions with a strong focus on religious
+              tourism.
+            </p>
+            <ul>
+              <li>Hajj & Umrah packages</li>
+              <li>Air ticketing & visas</li>
+              <li>Hotel reservations</li>
+              <li>Group travel packages</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VALUES -->
+    <section class="values" id="values">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">What Drives Us</div>
+          <h2>Our Core <span class="gold">Values</span></h2>
+          <div class="gold-line-center"></div>
+          <p>
+            The principles that guide every decision we make and every service
+            we deliver.
+          </p>
+        </div>
+        <div class="values-row">
+          <div class="val-card reveal">
+            <div class="val-icon">⭐</div>
+            <h4>Quality & Freshness</h4>
+            <p>
+              We source the finest ingredients and maintain the highest
+              preparation standards in everything we serve.
+            </p>
+          </div>
+          <div class="val-card reveal">
+            <div class="val-icon">🤝</div>
+            <h4>Integrity & Trust</h4>
+            <p>
+              Transparency, honesty, and ethical conduct are the foundation of
+              all our business relationships.
+            </p>
+          </div>
+          <div class="val-card reveal">
+            <div class="val-icon">👥</div>
+            <h4>Customer First</h4>
+            <p>
+              Every decision we make revolves around delivering an outstanding
+              experience for our customers.
+            </p>
+          </div>
+          <div class="val-card reveal">
+            <div class="val-icon">🕌</div>
+            <h4>Halal Compliance</h4>
+            <p>
+              All products and services strictly adhere to Islamic Shariah
+              principles and Halal requirements.
+            </p>
+          </div>
+          <div class="val-card reveal">
+            <div class="val-icon">🏘️</div>
+            <h4>Community Focus</h4>
+            <p>
+              We are committed to contributing positively to local communities
+              and the Saudi economy.
+            </p>
+          </div>
+          <div class="val-card reveal">
+            <div class="val-icon">🚀</div>
+            <h4>Growth & Innovation</h4>
+            <p>
+              We embrace continuous improvement and modern practices to stay
+              competitive and relevant.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MARKET -->
+    <section class="market" id="market">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">Market Opportunity</div>
+          <h2>A Thriving <span class="gold">Market</span></h2>
+          <div class="gold-line-center"></div>
+          <p>
+            Saudi Arabia's Vision 2030 has created unprecedented opportunities
+            in F&B, hospitality, and tourism.
+          </p>
+        </div>
+        <div class="market-stats">
+          <div class="m-stat reveal">
+            <div class="m-num">
+              <span class="counter" data-target="32">0</span
+              ><span class="gold">M+</span>
+            </div>
+            <div class="m-label">Population</div>
+          </div>
+          <div class="m-stat reveal">
+            <div class="m-num">
+              <span class="counter" data-target="200">0</span
+              ><span class="gold">B</span>
+            </div>
+            <div class="m-label">SAR F&B Market Value</div>
+          </div>
+          <div class="m-stat reveal">
+            <div class="m-num">
+              <span class="counter" data-target="6">0</span
+              ><span class="gold">+</span>
+            </div>
+            <div class="m-label">Target Cities</div>
+          </div>
+          <div class="m-stat reveal">
+            <div class="m-num">
+              <span class="counter" data-target="365">0</span>
+            </div>
+            <div class="m-label">Days of Pilgrim Flow</div>
+          </div>
+        </div>
+        <div class="section-header" style="margin-bottom: 28px">
+          <h2 style="font-size: 24px">
+            Target <span class="gold">Audience</span>
+          </h2>
+        </div>
+        <div class="audience-grid">
+          <div class="aud-card reveal">
+            <div class="aud-icon">👨‍👩‍👧‍👦</div>
+            <h5>Local Residents</h5>
+            <p>Families, professionals & students</p>
+          </div>
+          <div class="aud-card reveal">
+            <div class="aud-icon">💼</div>
+            <h5>Professionals</h5>
+            <p>Workers in commercial districts</p>
+          </div>
+          <div class="aud-card reveal">
+            <div class="aud-icon">🕋</div>
+            <h5>Pilgrims</h5>
+            <p>Hajj & Umrah year-round</p>
+          </div>
+          <div class="aud-card reveal">
+            <div class="aud-icon">🌍</div>
+            <h5>Tourists</h5>
+            <p>International & domestic visitors</p>
+          </div>
+          <div class="aud-card reveal">
+            <div class="aud-icon">🏢</div>
+            <h5>Corporate</h5>
+            <p>Catering & group packages</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TIMELINE -->
+    <section class="timeline-section" id="timeline">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">Our Roadmap</div>
+          <h2>Implementation <span class="gold">Timeline</span></h2>
+          <div class="gold-line-center"></div>
+          <p>
+            A phased rollout ensuring each division is established successfully
+            before launching the next.
+          </p>
+        </div>
+        <div class="tl-track">
+          <div class="tl-line"></div>
+          <div class="tl-item reveal">
+            <div class="tl-dot">Q1</div>
+            <div class="tl-content">
+              <div class="tl-card">
+                <h4>Company Registration & Setup</h4>
+                <p>
+                  Completed CR registration, opened bank accounts, secured
+                  initial funding, and hired the core team.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="tl-item reveal">
+            <div class="tl-dot">Q2</div>
+            <div class="tl-content">
+              <div class="tl-card">
+                <h4>🟢 Restaurant Launch</h4>
+                <p>
+                  Secured location, completed fit-out, recruited staff, obtained
+                  all licenses. Now open since April 2026.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="tl-item reveal">
+            <div class="tl-dot">Q3</div>
+            <div class="tl-content">
+              <div class="tl-card">
+                <h4>Stabilize & Plan Phase 2</h4>
+                <p>
+                  Build customer base, optimize operations, and begin scouting
+                  locations for juice & coffee outlets.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="tl-item reveal">
+            <div class="tl-dot">Q4</div>
+            <div class="tl-content">
+              <div class="tl-card">
+                <h4>Juice & Coffee Outlets</h4>
+                <p>
+                  Secure retail locations, complete fit-outs, obtain licenses,
+                  and launch with a full marketing campaign.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="tl-item reveal">
+            <div class="tl-dot">Y2</div>
+            <div class="tl-content">
+              <div class="tl-card">
+                <h4>Expand F&B & Plan Hotels</h4>
+                <p>
+                  Open additional locations across KSA, identify hotel
+                  acquisition or lease opportunities.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="tl-item reveal">
+            <div class="tl-dot">Y3</div>
+            <div class="tl-content">
+              <div class="tl-card">
+                <h4>Hotel & Travel Launch</h4>
+                <p>
+                  Acquire first hotel property, open travel offices, and launch
+                  Hajj & Umrah packages Kingdom-wide.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEAM -->
+    <section class="team" id="team">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">Our People</div>
+          <h2>Leadership <span class="gold">Team</span></h2>
+          <div class="gold-line-center"></div>
+          <p>
+            A passionate founding team committed to delivering excellence across
+            all divisions.
+          </p>
+        </div>
+        <div class="team-grid">
+          <div class="team-card reveal">
+            <div class="team-avatar">K</div>
+            <h4>Kaicher Kamrul Hasan</h4>
+            <div class="team-role">Owner / Managing Director</div>
+            <p>
+              Visionary founder driving Taqwa's strategic growth across multiple
+              business verticals in Saudi Arabia.
+            </p>
+          </div>
+          <div class="team-card reveal">
+            <div class="team-avatar">A</div>
+            <h4>MD. Abul Kalam</h4>
+            <div class="team-role">Operations Manager</div>
+            <p>
+              Leading day-to-day operations, ensuring service quality and
+              efficiency across all outlets and divisions.
+            </p>
+          </div>
+          <div class="team-card reveal">
+            <div class="team-avatar">K</div>
+            <h4>Kaiser Kamruzzaman</h4>
+            <div class="team-role">Finance & Administration</div>
+            <p>
+              Managing financial planning, regulatory compliance, and
+              administrative functions for sustainable growth.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <div class="cta-banner">
+      <div class="container">
+        <h2>
+          Ready to Partner With <span style="color: #c9a96e">Taqwa</span>?
+        </h2>
+        <p>
+          Whether you're a supplier, investor, landlord, or potential partner —
+          we'd love to connect with you.
+        </p>
+        <a href="#contact" class="btn-primary">Contact Us Today →</a>
+      </div>
+    </div>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">Get in Touch</div>
+          <h2>Contact <span class="gold">Us</span></h2>
+          <div class="gold-line-center"></div>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-info reveal-left">
+            <h3>
+              We'd Love to Hear <span style="color: var(--gold)">From You</span>
+            </h3>
+            <p>
+              For inquiries about our services, partnership opportunities,
+              catering orders, or any other information — please reach out
+              through any of the channels below.
+            </p>
+            <div class="contact-item">
+              <div class="ci-icon">📍</div>
+              <div class="ci-text">
+                <h5>Office Address</h5>
+                <p>
+                  Al Aqeeq District, Riyadh<br />Kingdom of Saudi Arabia, 13515
+                </p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="ci-icon">📞</div>
+              <div class="ci-text">
+                <h5>Phone / WhatsApp</h5>
+                <p>+966 576 429 878</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="ci-icon">✉️</div>
+              <div class="ci-text">
+                <h5>Email</h5>
+                <p>taqwatrading2505@gmail.com</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="ci-icon">🕐</div>
+              <div class="ci-text">
+                <h5>Business Hours</h5>
+                <p>
+                  Sun – Thu: 9:00 AM – 10:00 PM<br />Fri – Sat: 2:00 PM – 11:00
+                  PM
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="contact-form reveal-right">
+            <h4>Send Us a Message</h4>
+            <p class="form-sub">
+              Fill out the form below and we'll get back to you shortly.
+            </p>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Full Name</label
+                ><input type="text" placeholder="Your full name" />
+              </div>
+              <div class="form-group">
+                <label>Email</label
+                ><input type="email" placeholder="Your email address" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Phone</label
+                ><input type="tel" placeholder="+966 5XX XXX XXX" />
+              </div>
+              <div class="form-group">
+                <label>Inquiry Type</label>
+                <select>
+                  <option value="">Select category...</option>
+                  <option>Restaurant / Catering</option>
+                  <option>Juice & Coffee Outlets</option>
+                  <option>Hotel & Hospitality</option>
+                  <option>Travel & Tourism</option>
+                  <option>Business Partnership</option>
+                  <option>Investment Inquiry</option>
+                  <option>General Inquiry</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Message</label
+              ><textarea
+                placeholder="Tell us how we can help you..."
+              ></textarea>
+            </div>
+            <button class="form-submit" id="formBtn">Send Message →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-top">
+          <!-- LOGO: Replace with <img src="YOUR_LOGO_URL" alt="Taqwa" class="footer-top-logo"> -->
+          <div class="footer-top-placeholder">
+            Taqwa Trading and Services LLC
+          </div>
+          <div
+            class="ft-arabic"
+            style="font-family: &quot;Aref Ruqaa&quot;, serif"
+          >
+            تقوى للتجارة والخدمات ذ.م.م
+          </div>
+        </div>
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <p>
+              A trusted multi-service brand delivering excellence in Food &
+              Beverage, Hospitality, and Travel across the Kingdom of Saudi
+              Arabia. Committed to quality, integrity, and community.
+            </p>
+            <div class="footer-social">
+              <a href="#" title="Instagram">IG</a>
+              <a href="#" title="Snapchat">SC</a>
+              <a href="#" title="TikTok">TT</a>
+              <a href="#" title="X / Twitter">X</a>
+            </div>
+          </div>
+          <div class="footer-col">
+            <h5>Quick Links</h5>
+            <a href="#about">About Us</a>
+            <a href="#divisions">Our Services</a>
+            <a href="#values">Core Values</a>
+            <a href="#timeline">Roadmap</a>
+            <a href="#team">Our Team</a>
+            <a href="#contact">Contact</a>
+          </div>
+          <div class="footer-col">
+            <h5>Divisions</h5>
+            <a href="#divisions">Traditional Restaurant</a>
+            <a href="#divisions">Juice & Coffee</a>
+            <a href="#divisions">Hotels & Hospitality</a>
+            <a href="#divisions">Travel & Tourism</a>
+          </div>
+          <div class="footer-col">
+            <h5>Contact</h5>
+            <a href="#">Al Aqeeq, Riyadh, KSA</a>
+            <a href="tel:+966576429878">+966 576 429 878</a>
+            <a href="mailto:taqwatrading2505@gmail.com"
+              >taqwatrading2505@gmail.com</a
+            >
+            <a href="#">CR: 7053869819</a>
+            <a href="#">VAT: 314685024600003</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>
+            © 2026 Taqwa Trading and Services LLC Company. All rights reserved.
+          </p>
+          <p>Kingdom of Saudi Arabia — Riyadh</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- WHATSAPP FLOAT -->
+    <div class="whatsapp-float">
+      <div class="wa-tooltip">Chat with us on WhatsApp</div>
+      <a
+        href="https://wa.me/966576429878"
+        target="_blank"
+        class="wa-btn"
+        aria-label="WhatsApp"
+      >
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+          />
+        </svg>
+      </a>
+    </div>
+
+    <!-- BACK TO TOP -->
+    <button class="back-top" id="backTop" aria-label="Back to top">↑</button>
+
+    <script>
+      // Preloader
+      window.addEventListener("load", () => {
+        setTimeout(
+          () => document.getElementById("preloader").classList.add("hidden"),
+          800,
+        );
+      });
+
+      // Navbar scroll
+      const nav = document.getElementById("navbar");
+      const backTop = document.getElementById("backTop");
+      window.addEventListener("scroll", () => {
+        nav.classList.toggle("scrolled", window.scrollY > 60);
+        backTop.classList.toggle("show", window.scrollY > 500);
+      });
+
+      // Back to top
+      backTop.addEventListener("click", () =>
+        window.scrollTo({ top: 0, behavior: "smooth" }),
+      );
+
+      // Mobile menu
+      const toggle = document.getElementById("mobileToggle");
+      const links = document.getElementById("navLinks");
+      toggle.addEventListener("click", () => links.classList.toggle("open"));
+      links
+        .querySelectorAll("a")
+        .forEach((a) =>
+          a.addEventListener("click", () => links.classList.remove("open")),
+        );
+
+      // Smooth scroll
+      document.querySelectorAll('a[href^="#"]').forEach((a) => {
+        a.addEventListener("click", (e) => {
+          e.preventDefault();
+          const t = document.querySelector(a.getAttribute("href"));
+          if (t) {
+            const offset = 80;
+            const pos =
+              t.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({ top: pos, behavior: "smooth" });
+          }
+        });
+      });
+
+      // Scroll reveal
+      const revealEls = document.querySelectorAll(
+        ".reveal, .reveal-left, .reveal-right, .reveal-scale",
+      );
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e, i) => {
+            if (e.isIntersecting) {
+              setTimeout(() => e.target.classList.add("visible"), i * 80);
+              observer.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.12 },
+      );
+      revealEls.forEach((el) => observer.observe(el));
+
+      // Counter animation
+      const counters = document.querySelectorAll(".counter");
+      const counterObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const el = entry.target;
+              const target = parseInt(el.getAttribute("data-target"));
+              const duration = 2000;
+              const start = performance.now();
+              const animate = (now) => {
+                const progress = Math.min((now - start) / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                el.textContent = Math.floor(eased * target);
+                if (progress < 1) requestAnimationFrame(animate);
+                else el.textContent = target;
+              };
+              requestAnimationFrame(animate);
+              counterObserver.unobserve(el);
+            }
+          });
+        },
+        { threshold: 0.5 },
+      );
+      counters.forEach((c) => counterObserver.observe(c));
+
+      // Hero stat counters
+      const heroNums = document.querySelectorAll(".hero-stat .num[data-count]");
+      setTimeout(() => {
+        heroNums.forEach((el) => {
+          const target = parseInt(el.getAttribute("data-count"));
+          const duration = 1500;
+          const start = performance.now();
+          const animate = (now) => {
+            const progress = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.floor(eased * target);
+            if (progress < 1) requestAnimationFrame(animate);
+            else el.textContent = target;
+          };
+          requestAnimationFrame(animate);
+        });
+      }, 1200);
+
+      // Form submit
+      document.getElementById("formBtn").addEventListener("click", function () {
+        this.textContent = "✓ Message Sent Successfully";
+        this.style.background = "linear-gradient(135deg,#1a7a3a,#15632f)";
+        setTimeout(() => {
+          this.textContent = "Send Message →";
+          this.style.background = "";
+        }, 3000);
+      });
+    </script>
+  </body>
+</html>
