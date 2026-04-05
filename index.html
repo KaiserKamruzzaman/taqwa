@@ -1878,6 +1878,111 @@
         }
       }
 
+      /* LANGUAGE TOGGLE */
+      .lang-toggle {
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 30px;
+        padding: 3px;
+        margin-left: 12px;
+        flex-shrink: 0;
+      }
+      .lang-btn {
+        background: none;
+        border: none;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 11.5px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        padding: 5px 14px;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.25s;
+        font-family: "Open Sans", sans-serif;
+        line-height: 1;
+      }
+      .lang-btn.active {
+        background: var(--gold);
+        color: var(--navy);
+        box-shadow: 0 2px 8px rgba(201, 169, 110, 0.3);
+      }
+      .lang-btn:hover:not(.active) {
+        color: var(--gold);
+      }
+
+      /* RTL BODY FONT */
+      body.lang-ar {
+        font-family: "Amiri", serif;
+      }
+      body.lang-ar .section-tag,
+      body.lang-ar .hero-badge,
+      body.lang-ar .vm-label,
+      body.lang-ar .card-status,
+      body.lang-ar .team-role,
+      body.lang-ar .footer-col h5 {
+        letter-spacing: 0;
+      }
+
+      /* RTL OVERRIDES */
+      [dir="rtl"] .nav-links a::after {
+        left: auto;
+        right: 0;
+      }
+      [dir="rtl"] .lang-toggle {
+        margin-left: 0;
+        margin-right: 12px;
+      }
+      [dir="rtl"] .about-float-card {
+        right: auto;
+        left: -24px;
+      }
+      [dir="rtl"] .about-float-card2 {
+        left: auto;
+        right: -20px;
+      }
+      [dir="rtl"] .footer-col a:hover {
+        padding-left: 0;
+        padding-right: 4px;
+      }
+      [dir="rtl"] .tl-item:nth-child(odd) {
+        flex-direction: row;
+        text-align: left;
+      }
+      [dir="rtl"] .tl-item:nth-child(odd) .tl-content {
+        padding-right: 0;
+        padding-left: 50px;
+      }
+      [dir="rtl"] .tl-item:nth-child(even) .tl-content {
+        padding-left: 0;
+        padding-right: 50px;
+      }
+      [dir="rtl"] .hft-1 { left: auto; right: -10%; }
+      [dir="rtl"] .hft-2 { right: auto; left: -5%; }
+      [dir="rtl"] .hft-3 { left: auto; right: -5%; }
+      [dir="rtl"] .hft-4 { right: auto; left: -10%; }
+      [dir="rtl"] .hero-stats { direction: ltr; }
+      [dir="rtl"] .hero-badge { flex-direction: row-reverse; }
+      [dir="rtl"] .div-card ul li::before { left: auto; right: 0; }
+      [dir="rtl"] .div-card ul li { padding-left: 0; padding-right: 18px; }
+      [dir="rtl"] .contact-item { direction: rtl; }
+      [dir="rtl"] .about-feature { direction: rtl; }
+      [dir="rtl"] .tl-track .tl-item:nth-child(odd) { text-align: right; }
+
+      @media (max-width: 768px) {
+        [dir="rtl"] .tl-line { left: auto; right: 20px; }
+        [dir="rtl"] .tl-dot { left: auto; right: 20px; }
+        [dir="rtl"] .tl-content,
+        [dir="rtl"] .tl-item:nth-child(odd) .tl-content,
+        [dir="rtl"] .tl-item:nth-child(even) .tl-content {
+          padding-left: 0;
+          padding-right: 60px;
+        }
+        [dir="rtl"] .tl-item,
+        [dir="rtl"] .tl-item:nth-child(odd) { text-align: right; }
+      }
+
       @media print {
         * {
           -webkit-print-color-adjust: exact;
@@ -2007,6 +2112,10 @@
           <li><a href="#team">Team</a></li>
           <li><a href="#contact" class="nav-cta">Contact Us</a></li>
         </ul>
+        <div class="lang-toggle">
+          <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
+          <button class="lang-btn" data-lang="ar" onclick="setLang('ar')">عر</button>
+        </div>
         <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
           <span></span><span></span><span></span>
         </button>
@@ -2171,7 +2280,7 @@
     </section>
 
     <!-- VISION & MISSION -->
-    <section class="vm-section">
+    <section class="vm-section" id="vision">
       <div class="container">
         <div class="section-header" style="margin-bottom: 40px">
           <div
@@ -2402,7 +2511,7 @@
           </div>
         </div>
         <div class="section-header" style="margin-bottom: 28px">
-          <h2 style="font-size: 24px">
+          <h2 id="aud-header" style="font-size: 24px">
             Target <span class="gold">Audience</span>
           </h2>
         </div>
@@ -2571,7 +2680,7 @@
     </section>
 
     <!-- CTA BANNER -->
-    <div class="cta-banner">
+    <div class="cta-banner" id="cta">
       <div class="container">
         <h2>
           Ready to Partner With <span style="color: #c9a96e">Taqwa</span>?
@@ -2644,11 +2753,11 @@
             <div class="form-row">
               <div class="form-group">
                 <label>Full Name</label
-                ><input type="text" placeholder="Your full name" />
+                ><input id="name-input" type="text" placeholder="Your full name" />
               </div>
               <div class="form-group">
                 <label>Email</label
-                ><input type="email" placeholder="Your email address" />
+                ><input id="email-input" type="email" placeholder="Your email address" />
               </div>
             </div>
             <div class="form-row">
@@ -2658,7 +2767,7 @@
               </div>
               <div class="form-group">
                 <label>Inquiry Type</label>
-                <select>
+                <select id="contact-select">
                   <option value="">Select category...</option>
                   <option>Restaurant / Catering</option>
                   <option>Juice & Coffee Outlets</option>
@@ -2673,6 +2782,7 @@
             <div class="form-group">
               <label>Message</label
               ><textarea
+                id="contact-textarea"
                 placeholder="Tell us how we can help you..."
               ></textarea>
             </div>
@@ -2719,7 +2829,7 @@
               </a>
             </div>
           </div>
-          <div class="footer-col">
+          <div class="footer-col" id="footer-quick">
             <h5>Quick Links</h5>
             <a href="#about">About Us</a>
             <a href="#divisions">Our Services</a>
@@ -2728,14 +2838,14 @@
             <a href="#team">Our Team</a>
             <a href="#contact">Contact</a>
           </div>
-          <div class="footer-col">
+          <div class="footer-col" id="footer-divisions">
             <h5>Divisions</h5>
             <a href="#divisions">Traditional Restaurant</a>
             <a href="#divisions">Juice & Coffee</a>
             <a href="#divisions">Hotels & Hospitality</a>
             <a href="#divisions">Travel & Tourism</a>
           </div>
-          <div class="footer-col">
+          <div class="footer-col" id="footer-contact-col">
             <h5>Contact</h5>
             <a href="#">Al Aqeeq, Riyadh, KSA</a>
             <a href="tel:+966576429878">+966 576 429 878</a>
@@ -2776,6 +2886,415 @@
     <button class="back-top" id="backTop" aria-label="Back to top">↑</button>
 
     <script>
+      // ===================== I18N =====================
+      let currentLang = localStorage.getItem('lang') || 'en';
+
+      const T = {
+        en: {
+          navLogoFull: 'Taqwa Trading and Services LLC<span>تقوى للتجارة والخدمات ذ.م.م</span>',
+          navAbout: 'About', navServices: 'Services', navValues: 'Values',
+          navMarket: 'Market', navTimeline: 'Roadmap', navTeam: 'Team', navContact: 'Contact Us',
+          heroBadge: '<span class="dot"></span> Now Open in Riyadh, KSA',
+          heroH1: 'Building a <span class="gold">Trusted</span> Multi-Service Brand Across Saudi Arabia',
+          heroP: 'From authentic traditional dining to hospitality and travel — Taqwa delivers excellence in Food & Beverage, Hotels, and Tourism services throughout the Kingdom.',
+          heroBtnPrimary: 'Explore Our Services →', heroBtnOutline: 'Get in Touch',
+          heroLabel1: 'Business Divisions', heroLabel2: 'Target Cities', heroLabel3: 'Established',
+          heroTag1: 'Restaurant', heroTag2: 'Coffee & Juice', heroTag3: 'Hotels', heroTag4: 'Travel',
+          aboutTag: 'About Us',
+          aboutH3: 'A New Standard of <span class="gold">Quality & Trust</span> in Saudi Arabia',
+          aboutP1: 'Taqwa Trading and Services LLC Company is a Saudi-registered limited liability company headquartered in Al Aqeeq District, Riyadh. Founded with a clear vision to build a diversified business spanning Food & Beverage, Hospitality & Hotels, and Travel & Tourism.',
+          aboutP2: 'Our phased growth strategy ensures sustainable expansion across multiple cities while maintaining the highest standards of quality and customer satisfaction aligned with Saudi Vision 2030.',
+          aboutCRLabel: 'CR Number', aboutSubText: 'Est. 2026 — Riyadh, KSA',
+          aboutVat: 'VAT Registered', aboutZatca: 'ZATCA Compliant',
+          aboutF1h: 'Saudi Registered LLC', aboutF1p: 'Fully compliant entity',
+          aboutF2h: 'HQ in Riyadh', aboutF2p: 'Al Aqeeq District',
+          aboutF3h: '100% Halal', aboutF3p: 'Shariah compliant',
+          aboutF4h: '4 Divisions', aboutF4p: 'Multi-sector growth',
+          vmTag: 'Our Purpose',
+          vmH2: 'Guided by <span class="gold">Vision</span> &amp; <span class="gold">Mission</span>',
+          vmVLabel: 'Our Vision', vmVH3: 'Leading Multi-Service Brand',
+          vmVP: 'To become a leading and trusted multi-service brand across the Kingdom of Saudi Arabia — recognized for delivering exceptional food, beverage, hospitality, and travel experiences that enrich the daily lives of our community and visitors.',
+          vmMLabel: 'Our Mission', vmMH3: 'Excellence Under One Brand',
+          vmMP: 'To serve our customers with fresh, high-quality food and beverages, authentic traditional dining, premium hotel accommodations, and comprehensive travel solutions — including Hajj & Umrah services — delivered with integrity and a commitment to excellence.',
+          divTag: 'What We Do',
+          divH2: 'Our Business <span class="gold">Divisions</span>',
+          divP: 'A strategic four-phase expansion model delivering sustainable growth and operational excellence across the Kingdom.',
+          div1h: 'Traditional Restaurant', div1s: '● Now Open',
+          div1p: 'Full-service restaurant featuring authentic traditional meals, fresh juices, and specialty coffee in Riyadh.',
+          div1l1: 'Kabsa, Mandi, Madhbi & Hanith', div1l2: 'Family-friendly dining', div1l3: 'Fresh juice bar & coffee', div1l4: 'Catering & delivery services',
+          div2h: 'Juice & Coffee Outlets', div2s: '◐ Upcoming',
+          div2p: 'Vibrant takeaway and dine-in outlets across key locations in Saudi Arabia.',
+          div2l1: 'Fresh juices & smoothies', div2l2: 'Arabic & international coffee', div2l3: 'Roasted corn & snacks', div2l4: 'High-footfall locations',
+          div3h: 'Hotel & Hospitality', div3s: '○ Planned',
+          div3p: 'Hotel properties for business travelers, tourists, and Hajj & Umrah pilgrims.',
+          div3l1: 'Budget to premium rooms', div3l2: 'In-house Taqwa dining', div3l3: 'Pilgrim accommodation', div3l4: 'Corporate event facilities',
+          div4h: 'Travel & Tourism', div4s: '○ Planned',
+          div4p: 'End-to-end travel solutions with a strong focus on religious tourism.',
+          div4l1: 'Hajj & Umrah packages', div4l2: 'Air ticketing & visas', div4l3: 'Hotel reservations', div4l4: 'Group travel packages',
+          valTag: 'What Drives Us',
+          valH2: 'Our Core <span class="gold">Values</span>',
+          valP: 'The principles that guide every decision we make and every service we deliver.',
+          val1h: 'Quality & Freshness', val1p: 'We source the finest ingredients and maintain the highest preparation standards in everything we serve.',
+          val2h: 'Integrity & Trust', val2p: 'Transparency, honesty, and ethical conduct are the foundation of all our business relationships.',
+          val3h: 'Customer First', val3p: 'Every decision we make revolves around delivering an outstanding experience for our customers.',
+          val4h: 'Halal Compliance', val4p: 'All products and services strictly adhere to Islamic Shariah principles and Halal requirements.',
+          val5h: 'Community Focus', val5p: 'We are committed to contributing positively to local communities and the Saudi economy.',
+          val6h: 'Growth & Innovation', val6p: 'We embrace continuous improvement and modern practices to stay competitive and relevant.',
+          mktTag: 'Market Opportunity',
+          mktH2: 'A Thriving <span class="gold">Market</span>',
+          mktP: "Saudi Arabia's Vision 2030 has created unprecedented opportunities in F&amp;B, hospitality, and tourism.",
+          mktL1: 'Population', mktL2: 'SAR F&amp;B Market Value', mktL3: 'Target Cities', mktL4: 'Days of Pilgrim Flow',
+          audH2: 'Target <span class="gold">Audience</span>',
+          aud1h: 'Local Residents', aud1p: 'Families, professionals & students',
+          aud2h: 'Professionals', aud2p: 'Workers in commercial districts',
+          aud3h: 'Pilgrims', aud3p: 'Hajj & Umrah year-round',
+          aud4h: 'Tourists', aud4p: 'International & domestic visitors',
+          aud5h: 'Corporate', aud5p: 'Catering & group packages',
+          tlTag: 'Our Roadmap',
+          tlH2: 'Implementation <span class="gold">Timeline</span>',
+          tlP: 'A phased rollout ensuring each division is established successfully before launching the next.',
+          tl1h: 'Company Registration & Setup', tl1p: 'Completed CR registration, opened bank accounts, secured initial funding, and hired the core team.',
+          tl2h: '🟢 Restaurant Launch', tl2p: 'Secured location, completed fit-out, recruited staff, obtained all licenses. Now open since April 2026.',
+          tl3h: 'Stabilize & Plan Phase 2', tl3p: 'Build customer base, optimize operations, and begin scouting locations for juice & coffee outlets.',
+          tl4h: 'Juice & Coffee Outlets', tl4p: 'Secure retail locations, complete fit-outs, obtain licenses, and launch with a full marketing campaign.',
+          tl5h: 'Expand F&amp;B & Plan Hotels', tl5p: 'Open additional locations across KSA, identify hotel acquisition or lease opportunities.',
+          tl6h: 'Hotel & Travel Launch', tl6p: 'Acquire first hotel property, open travel offices, and launch Hajj & Umrah packages Kingdom-wide.',
+          teamTag: 'Our People',
+          teamH2: 'Leadership <span class="gold">Team</span>',
+          teamP: 'A passionate founding team committed to delivering excellence across all divisions.',
+          team1role: 'Owner / Managing Director', team1p: "Visionary founder driving Taqwa's strategic growth across multiple business verticals in Saudi Arabia.",
+          team2role: 'Operations Manager', team2p: 'Leading day-to-day operations, ensuring service quality and efficiency across all outlets and divisions.',
+          team3role: 'Finance & Administration', team3p: 'Managing financial planning, regulatory compliance, and administrative functions for sustainable growth.',
+          ctaH2: 'Ready to Partner With <span style="color:#c9a96e">Taqwa</span>?',
+          ctaP: "Whether you're a supplier, investor, landlord, or potential partner — we'd love to connect with you.",
+          ctaBtn: 'Contact Us Today →',
+          contactTag: 'Get in Touch',
+          contactH2: 'Contact <span class="gold">Us</span>',
+          contactH3: "We'd Love to Hear <span style=\"color:var(--gold)\">From You</span>",
+          contactP: 'For inquiries about our services, partnership opportunities, catering orders, or any other information — please reach out through any of the channels below.',
+          ciALabel: 'Office Address', ciAVal: 'Al Aqeeq District, Riyadh<br>Kingdom of Saudi Arabia, 13515',
+          ciPLabel: 'Phone / WhatsApp', ciELabel: 'Email',
+          ciHLabel: 'Business Hours', ciHVal: 'Sun – Thu: 9:00 AM – 10:00 PM<br>Fri – Sat: 2:00 PM – 11:00 PM',
+          formH4: 'Send Us a Message', formSub: "Fill out the form below and we'll get back to you shortly.",
+          labelName: 'Full Name', phName: 'Your full name',
+          labelEmail: 'Email', phEmail: 'Your email address',
+          labelPhone: 'Phone', labelInquiry: 'Inquiry Type', labelMsg: 'Message', phMsg: 'Tell us how we can help you...',
+          selectOpts: '<option value="">Select category...</option><option>Restaurant / Catering</option><option>Juice & Coffee Outlets</option><option>Hotel & Hospitality</option><option>Travel & Tourism</option><option>Business Partnership</option><option>Investment Inquiry</option><option>General Inquiry</option>',
+          btnSubmit: 'Send Message →', btnSent: '✓ Message Sent Successfully',
+          footerBrandP: 'A trusted multi-service brand delivering excellence in Food & Beverage, Hospitality, and Travel across the Kingdom of Saudi Arabia. Committed to quality, integrity, and community.',
+          footerQLinkH: 'Quick Links', fql1: 'About Us', fql2: 'Our Services', fql3: 'Core Values', fql4: 'Roadmap', fql5: 'Our Team', fql6: 'Contact',
+          footerDivH: 'Divisions', fdiv1: 'Traditional Restaurant', fdiv2: 'Juice & Coffee', fdiv3: 'Hotels & Hospitality', fdiv4: 'Travel & Tourism',
+          footerContactH: 'Contact',
+          footerB1: '© 2026 Taqwa Trading and Services LLC Company. All rights reserved.',
+          footerB2: 'Kingdom of Saudi Arabia — Riyadh',
+          waTooltip: 'Chat with us on WhatsApp',
+        },
+        ar: {
+          navLogoFull: 'تقوى للتجارة والخدمات ذ.م.م<span>Taqwa Trading and Services LLC</span>',
+          navAbout: 'عن الشركة', navServices: 'خدماتنا', navValues: 'قيمنا',
+          navMarket: 'السوق', navTimeline: 'خارطة الطريق', navTeam: 'الفريق', navContact: 'تواصل معنا',
+          heroBadge: '<span class="dot"></span> متاح الآن في الرياض، المملكة العربية السعودية',
+          heroH1: 'بناء علامة تجارية <span class="gold">موثوقة</span> متعددة الخدمات في المملكة العربية السعودية',
+          heroP: 'من المطاعم التقليدية الأصيلة إلى الضيافة والسياحة — تقدّم تقوى التميّز في خدمات الأغذية والمشروبات والفنادق والسياحة في جميع أنحاء المملكة.',
+          heroBtnPrimary: '← اكتشف خدماتنا', heroBtnOutline: 'تواصل معنا',
+          heroLabel1: 'أقسام الأعمال', heroLabel2: 'المدن المستهدفة', heroLabel3: 'تأسست',
+          heroTag1: 'مطعم', heroTag2: 'قهوة وعصير', heroTag3: 'فنادق', heroTag4: 'سفر',
+          aboutTag: 'عن الشركة',
+          aboutH3: 'معيار جديد من <span class="gold">الجودة والثقة</span> في المملكة العربية السعودية',
+          aboutP1: 'شركة تقوى للتجارة والخدمات ذ.م.م شركة سعودية ذات مسؤولية محدودة، مقرها الرئيسي في حي العقيق، الرياض. تأسست برؤية واضحة لبناء أعمال متنوعة تشمل الأغذية والمشروبات والضيافة والفنادق والسفر والسياحة.',
+          aboutP2: 'تضمن استراتيجيتنا للنمو المتدرج توسعاً مستداماً عبر مدن متعددة مع الحفاظ على أعلى معايير الجودة ورضا العملاء بما يتوافق مع رؤية المملكة 2030.',
+          aboutCRLabel: 'رقم السجل التجاري', aboutSubText: 'تأسست 2026 — الرياض، المملكة العربية السعودية',
+          aboutVat: 'مسجل في ضريبة القيمة المضافة', aboutZatca: 'متوافق مع هيئة الزكاة والضريبة',
+          aboutF1h: 'شركة ذ.م.م سعودية', aboutF1p: 'كيان متوافق بالكامل',
+          aboutF2h: 'المقر في الرياض', aboutF2p: 'حي العقيق',
+          aboutF3h: '100% حلال', aboutF3p: 'متوافق مع الشريعة الإسلامية',
+          aboutF4h: '4 أقسام', aboutF4p: 'نمو متعدد القطاعات',
+          vmTag: 'هدفنا',
+          vmH2: 'موجهون بـ<span class="gold">الرؤية</span> و<span class="gold">الرسالة</span>',
+          vmVLabel: 'رؤيتنا', vmVH3: 'علامة تجارية رائدة متعددة الخدمات',
+          vmVP: 'أن نصبح علامة تجارية رائدة وموثوقة متعددة الخدمات في جميع أنحاء المملكة العربية السعودية — معروفة بتقديم تجارب استثنائية في الأغذية والمشروبات والضيافة والسفر تُثري الحياة اليومية لمجتمعنا وزوارنا.',
+          vmMLabel: 'مهمتنا', vmMH3: 'التميز تحت علامة تجارية واحدة',
+          vmMP: 'خدمة عملائنا بأغذية ومشروبات طازجة وعالية الجودة، ومطاعم تقليدية أصيلة، وإقامة فندقية فاخرة، وحلول سفر شاملة — تشمل خدمات الحج والعمرة — مقدمة بنزاهة والتزام بالتميز.',
+          divTag: 'ما نقدمه',
+          divH2: 'أقسام <span class="gold">أعمالنا</span>',
+          divP: 'نموذج توسع استراتيجي متدرج على أربع مراحل يحقق نمواً مستداماً وتميزاً تشغيلياً في جميع أنحاء المملكة.',
+          div1h: 'مطعم تقليدي', div1s: '● مفتوح الآن',
+          div1p: 'مطعم متكامل الخدمات يقدم وجبات تقليدية أصيلة وعصائر طازجة وقهوة مختصة في الرياض.',
+          div1l1: 'كبسة ومندي ومضبي وحنيث', div1l2: 'بيئة مناسبة للعائلات', div1l3: 'بار عصائر طازجة وقهوة', div1l4: 'خدمات التموين والتوصيل',
+          div2h: 'محلات عصير وقهوة', div2s: '◐ قريباً',
+          div2p: 'محلات نابضة بالحياة للوجبات الخفيفة والجلوس في مواقع رئيسية بالمملكة.',
+          div2l1: 'عصائر طازجة وسموذي', div2l2: 'قهوة عربية وعالمية', div2l3: 'ذرة مشوية ووجبات خفيفة', div2l4: 'مواقع بكثافة زوار عالية',
+          div3h: 'فنادق وضيافة', div3s: '○ مخطط',
+          div3p: 'منشآت فندقية لرجال الأعمال والسياح وحجاج ومعتمري الحج والعمرة.',
+          div3l1: 'غرف اقتصادية وفاخرة', div3l2: 'مطعم تقوى الداخلي', div3l3: 'إقامة للحجاج والمعتمرين', div3l4: 'مرافق لفعاليات الشركات',
+          div4h: 'سفر وسياحة', div4s: '○ مخطط',
+          div4p: 'حلول سفر متكاملة مع تركيز قوي على السياحة الدينية.',
+          div4l1: 'باقات الحج والعمرة', div4l2: 'حجز تذاكر الطيران والتأشيرات', div4l3: 'حجوزات الفنادق', div4l4: 'باقات السفر الجماعي',
+          valTag: 'ما يحركنا',
+          valH2: 'قيمنا <span class="gold">الأساسية</span>',
+          valP: 'المبادئ التي توجه كل قرار نتخذه وكل خدمة نقدمها.',
+          val1h: 'الجودة والطازجية', val1p: 'نختار أجود المكونات ونحافظ على أعلى معايير التحضير في كل ما نقدمه.',
+          val2h: 'النزاهة والثقة', val2p: 'الشفافية والأمانة والسلوك الأخلاقي هي أساس جميع علاقاتنا التجارية.',
+          val3h: 'العميل أولاً', val3p: 'كل قرار نتخذه يتمحور حول تقديم تجربة استثنائية لعملائنا.',
+          val4h: 'الالتزام بالحلال', val4p: 'جميع المنتجات والخدمات تلتزم صارمة بمبادئ الشريعة الإسلامية ومتطلبات الحلال.',
+          val5h: 'التركيز على المجتمع', val5p: 'نلتزم بالمساهمة الإيجابية في المجتمعات المحلية والاقتصاد السعودي.',
+          val6h: 'النمو والابتكار', val6p: 'نتبنى التحسين المستمر والممارسات الحديثة للبقاء تنافسيين ومواكبين.',
+          mktTag: 'فرصة السوق',
+          mktH2: 'سوق <span class="gold">مزدهر</span>',
+          mktP: 'أوجدت رؤية المملكة 2030 فرصاً غير مسبوقة في قطاعات الأغذية والمشروبات والضيافة والسياحة.',
+          mktL1: 'عدد السكان', mktL2: 'قيمة سوق الأغذية والمشروبات', mktL3: 'المدن المستهدفة', mktL4: 'أيام تدفق الحجاج',
+          audH2: 'الجمهور <span class="gold">المستهدف</span>',
+          aud1h: 'السكان المحليون', aud1p: 'الأسر والمهنيون والطلاب',
+          aud2h: 'المهنيون', aud2p: 'العاملون في المناطق التجارية',
+          aud3h: 'الحجاج والمعتمرون', aud3p: 'طوال السنة لموسمي الحج والعمرة',
+          aud4h: 'السياح', aud4p: 'الزوار الدوليون والمحليون',
+          aud5h: 'الشركات', aud5p: 'خدمات تقديم الطعام والباقات الجماعية',
+          tlTag: 'خارطة طريقنا',
+          tlH2: 'الجدول الزمني <span class="gold">للتنفيذ</span>',
+          tlP: 'خطة متدرجة تضمن نجاح كل قسم قبل إطلاق القسم التالي.',
+          tl1h: 'تسجيل الشركة والإعداد', tl1p: 'اكتمل تسجيل السجل التجاري وفتح الحسابات البنكية وتأمين التمويل الأولي وتعيين الفريق الأساسي.',
+          tl2h: '🟢 إطلاق المطعم', tl2p: 'تأمين الموقع وإتمام التجهيز وتوظيف الطاقم والحصول على جميع التراخيص. افتُتح رسمياً في أبريل 2026.',
+          tl3h: 'الاستقرار والتخطيط للمرحلة الثانية', tl3p: 'بناء قاعدة العملاء وتحسين العمليات والبدء في استطلاع مواقع محلات العصير والقهوة.',
+          tl4h: 'محلات عصير وقهوة', tl4p: 'تأمين المواقع التجارية وإتمام التجهيز والحصول على التراخيص والإطلاق بحملة تسويقية شاملة.',
+          tl5h: 'توسيع الأغذية والتخطيط للفنادق', tl5p: 'افتتاح مواقع إضافية في المملكة وتحديد فرص الاستحواذ أو الإيجار للفنادق.',
+          tl6h: 'إطلاق الفنادق والسفر', tl6p: 'الاستحواذ على أول فندق وفتح مكاتب السفر وإطلاق باقات الحج والعمرة على مستوى المملكة.',
+          teamTag: 'فريقنا',
+          teamH2: 'فريق <span class="gold">القيادة</span>',
+          teamP: 'فريق تأسيسي متحمس ملتزم بتحقيق التميز في جميع الأقسام.',
+          team1role: 'المالك / المدير العام', team1p: 'مؤسس ذو رؤية يقود النمو الاستراتيجي لتقوى عبر قطاعات الأعمال المتعددة في المملكة العربية السعودية.',
+          team2role: 'مدير العمليات', team2p: 'يقود العمليات اليومية ويضمن جودة الخدمة والكفاءة في جميع المنافذ والأقسام.',
+          team3role: 'المالية والإدارة', team3p: 'إدارة التخطيط المالي والامتثال التنظيمي والوظائف الإدارية لتحقيق نمو مستدام.',
+          ctaH2: 'هل أنت مستعد للشراكة مع <span style="color:#c9a96e">تقوى</span>؟',
+          ctaP: 'سواء كنت مورداً أو مستثمراً أو مالك عقار أو شريكاً محتملاً — يسعدنا التواصل معك.',
+          ctaBtn: '← تواصل معنا اليوم',
+          contactTag: 'تواصل معنا',
+          contactH2: 'اتصل <span class="gold">بنا</span>',
+          contactH3: 'يسعدنا <span style="color:var(--gold)">سماعك</span>',
+          contactP: 'للاستفسار عن خدماتنا أو فرص الشراكة أو طلبات التموين أو أي معلومات أخرى — تواصل معنا عبر أي من القنوات أدناه.',
+          ciALabel: 'عنوان المكتب', ciAVal: 'حي العقيق، الرياض<br>المملكة العربية السعودية، 13515',
+          ciPLabel: 'هاتف / واتساب', ciELabel: 'البريد الإلكتروني',
+          ciHLabel: 'ساعات العمل', ciHVal: 'الأحد – الخميس: 9:00 ص – 10:00 م<br>الجمعة – السبت: 2:00 م – 11:00 م',
+          formH4: 'أرسل لنا رسالة', formSub: 'امأل النموذج أدناه وسنرد عليك في أقرب وقت.',
+          labelName: 'الاسم الكامل', phName: 'اسمك الكامل',
+          labelEmail: 'البريد الإلكتروني', phEmail: 'بريدك الإلكتروني',
+          labelPhone: 'الهاتف', labelInquiry: 'نوع الاستفسار', labelMsg: 'الرسالة', phMsg: 'أخبرنا كيف يمكننا مساعدتك...',
+          selectOpts: '<option value="">اختر التصنيف...</option><option>مطعم / تموين</option><option>محلات عصير وقهوة</option><option>فنادق وضيافة</option><option>سفر وسياحة</option><option>شراكة تجارية</option><option>استفسار استثماري</option><option>استفسار عام</option>',
+          btnSubmit: '← إرسال الرسالة', btnSent: '✓ تم إرسال الرسالة بنجاح',
+          footerBrandP: 'علامة تجارية موثوقة متعددة الخدمات تقدم التميز في الأغذية والمشروبات والضيافة والسفر في جميع أنحاء المملكة العربية السعودية. ملتزمون بالجودة والنزاهة والمجتمع.',
+          footerQLinkH: 'روابط سريعة', fql1: 'عن الشركة', fql2: 'خدماتنا', fql3: 'القيم الأساسية', fql4: 'خارطة الطريق', fql5: 'فريقنا', fql6: 'تواصل',
+          footerDivH: 'الأقسام', fdiv1: 'مطعم تقليدي', fdiv2: 'عصير وقهوة', fdiv3: 'فنادق وضيافة', fdiv4: 'سفر وسياحة',
+          footerContactH: 'تواصل',
+          footerB1: '© 2026 شركة تقوى للتجارة والخدمات ذ.م.م. جميع الحقوق محفوظة.',
+          footerB2: 'المملكة العربية السعودية — الرياض',
+          waTooltip: 'تواصل معنا على واتساب',
+        }
+      };
+
+      // [selector, translation-key]
+      const MAP = [
+        ['.nav-logo-text', 'navLogoFull'],
+        ['#navLinks li:nth-child(1) a', 'navAbout'],
+        ['#navLinks li:nth-child(2) a', 'navServices'],
+        ['#navLinks li:nth-child(3) a', 'navValues'],
+        ['#navLinks li:nth-child(4) a', 'navMarket'],
+        ['#navLinks li:nth-child(5) a', 'navTimeline'],
+        ['#navLinks li:nth-child(6) a', 'navTeam'],
+        ['#navLinks li:nth-child(7) a', 'navContact'],
+        ['.hero-badge', 'heroBadge'],
+        ['.hero h1', 'heroH1'],
+        ['.hero-content > p', 'heroP'],
+        ['.hero-btns .btn-primary', 'heroBtnPrimary'],
+        ['.hero-btns .btn-outline', 'heroBtnOutline'],
+        ['.hero-stats .hero-stat:nth-child(1) .label', 'heroLabel1'],
+        ['.hero-stats .hero-stat:nth-child(2) .label', 'heroLabel2'],
+        ['.hero-stats .hero-stat:nth-child(3) .label', 'heroLabel3'],
+        ['.hft-1 .hft-label', 'heroTag1'],
+        ['.hft-2 .hft-label', 'heroTag2'],
+        ['.hft-3 .hft-label', 'heroTag3'],
+        ['.hft-4 .hft-label', 'heroTag4'],
+        ['#about .section-tag', 'aboutTag'],
+        ['#about .about-content h3', 'aboutH3'],
+        ['#about .about-content > p:nth-of-type(1)', 'aboutP1'],
+        ['#about .about-content > p:nth-of-type(2)', 'aboutP2'],
+        ['.about-float-card h5', 'aboutCRLabel'],
+        ['.about-img-inner .sub-text', 'aboutSubText'],
+        ['.about-float-card2 .afc-text', 'aboutVat'],
+        ['.about-float-card2 .afc-sub', 'aboutZatca'],
+        ['#about .about-feature:nth-child(1) h5', 'aboutF1h'],
+        ['#about .about-feature:nth-child(1) p', 'aboutF1p'],
+        ['#about .about-feature:nth-child(2) h5', 'aboutF2h'],
+        ['#about .about-feature:nth-child(2) p', 'aboutF2p'],
+        ['#about .about-feature:nth-child(3) h5', 'aboutF3h'],
+        ['#about .about-feature:nth-child(3) p', 'aboutF3p'],
+        ['#about .about-feature:nth-child(4) h5', 'aboutF4h'],
+        ['#about .about-feature:nth-child(4) p', 'aboutF4p'],
+        ['#vision .section-tag', 'vmTag'],
+        ['#vision h2', 'vmH2'],
+        ['#vision .vm-card:nth-child(1) .vm-label', 'vmVLabel'],
+        ['#vision .vm-card:nth-child(1) h3', 'vmVH3'],
+        ['#vision .vm-card:nth-child(1) p', 'vmVP'],
+        ['#vision .vm-card:nth-child(2) .vm-label', 'vmMLabel'],
+        ['#vision .vm-card:nth-child(2) h3', 'vmMH3'],
+        ['#vision .vm-card:nth-child(2) p', 'vmMP'],
+        ['#divisions .section-tag', 'divTag'],
+        ['#divisions .section-header h2', 'divH2'],
+        ['#divisions .section-header p', 'divP'],
+        ['#divisions .div-card:nth-child(1) h4', 'div1h'],
+        ['#divisions .div-card:nth-child(1) .card-status', 'div1s'],
+        ['#divisions .div-card:nth-child(1) > p', 'div1p'],
+        ['#divisions .div-card:nth-child(1) li:nth-child(1)', 'div1l1'],
+        ['#divisions .div-card:nth-child(1) li:nth-child(2)', 'div1l2'],
+        ['#divisions .div-card:nth-child(1) li:nth-child(3)', 'div1l3'],
+        ['#divisions .div-card:nth-child(1) li:nth-child(4)', 'div1l4'],
+        ['#divisions .div-card:nth-child(2) h4', 'div2h'],
+        ['#divisions .div-card:nth-child(2) .card-status', 'div2s'],
+        ['#divisions .div-card:nth-child(2) > p', 'div2p'],
+        ['#divisions .div-card:nth-child(2) li:nth-child(1)', 'div2l1'],
+        ['#divisions .div-card:nth-child(2) li:nth-child(2)', 'div2l2'],
+        ['#divisions .div-card:nth-child(2) li:nth-child(3)', 'div2l3'],
+        ['#divisions .div-card:nth-child(2) li:nth-child(4)', 'div2l4'],
+        ['#divisions .div-card:nth-child(3) h4', 'div3h'],
+        ['#divisions .div-card:nth-child(3) .card-status', 'div3s'],
+        ['#divisions .div-card:nth-child(3) > p', 'div3p'],
+        ['#divisions .div-card:nth-child(3) li:nth-child(1)', 'div3l1'],
+        ['#divisions .div-card:nth-child(3) li:nth-child(2)', 'div3l2'],
+        ['#divisions .div-card:nth-child(3) li:nth-child(3)', 'div3l3'],
+        ['#divisions .div-card:nth-child(3) li:nth-child(4)', 'div3l4'],
+        ['#divisions .div-card:nth-child(4) h4', 'div4h'],
+        ['#divisions .div-card:nth-child(4) .card-status', 'div4s'],
+        ['#divisions .div-card:nth-child(4) > p', 'div4p'],
+        ['#divisions .div-card:nth-child(4) li:nth-child(1)', 'div4l1'],
+        ['#divisions .div-card:nth-child(4) li:nth-child(2)', 'div4l2'],
+        ['#divisions .div-card:nth-child(4) li:nth-child(3)', 'div4l3'],
+        ['#divisions .div-card:nth-child(4) li:nth-child(4)', 'div4l4'],
+        ['#values .section-tag', 'valTag'],
+        ['#values .section-header h2', 'valH2'],
+        ['#values .section-header p', 'valP'],
+        ['#values .val-card:nth-child(1) h4', 'val1h'],
+        ['#values .val-card:nth-child(1) p', 'val1p'],
+        ['#values .val-card:nth-child(2) h4', 'val2h'],
+        ['#values .val-card:nth-child(2) p', 'val2p'],
+        ['#values .val-card:nth-child(3) h4', 'val3h'],
+        ['#values .val-card:nth-child(3) p', 'val3p'],
+        ['#values .val-card:nth-child(4) h4', 'val4h'],
+        ['#values .val-card:nth-child(4) p', 'val4p'],
+        ['#values .val-card:nth-child(5) h4', 'val5h'],
+        ['#values .val-card:nth-child(5) p', 'val5p'],
+        ['#values .val-card:nth-child(6) h4', 'val6h'],
+        ['#values .val-card:nth-child(6) p', 'val6p'],
+        ['#market .section-tag', 'mktTag'],
+        ['#market .section-header h2', 'mktH2'],
+        ['#market .section-header p', 'mktP'],
+        ['.market-stats .m-stat:nth-child(1) .m-label', 'mktL1'],
+        ['.market-stats .m-stat:nth-child(2) .m-label', 'mktL2'],
+        ['.market-stats .m-stat:nth-child(3) .m-label', 'mktL3'],
+        ['.market-stats .m-stat:nth-child(4) .m-label', 'mktL4'],
+        ['#aud-header', 'audH2'],
+        ['.audience-grid .aud-card:nth-child(1) h5', 'aud1h'],
+        ['.audience-grid .aud-card:nth-child(1) p', 'aud1p'],
+        ['.audience-grid .aud-card:nth-child(2) h5', 'aud2h'],
+        ['.audience-grid .aud-card:nth-child(2) p', 'aud2p'],
+        ['.audience-grid .aud-card:nth-child(3) h5', 'aud3h'],
+        ['.audience-grid .aud-card:nth-child(3) p', 'aud3p'],
+        ['.audience-grid .aud-card:nth-child(4) h5', 'aud4h'],
+        ['.audience-grid .aud-card:nth-child(4) p', 'aud4p'],
+        ['.audience-grid .aud-card:nth-child(5) h5', 'aud5h'],
+        ['.audience-grid .aud-card:nth-child(5) p', 'aud5p'],
+        ['#timeline .section-tag', 'tlTag'],
+        ['#timeline .section-header h2', 'tlH2'],
+        ['#timeline .section-header p', 'tlP'],
+        ['.tl-track .tl-item:nth-child(2) h4', 'tl1h'],
+        ['.tl-track .tl-item:nth-child(2) p', 'tl1p'],
+        ['.tl-track .tl-item:nth-child(3) h4', 'tl2h'],
+        ['.tl-track .tl-item:nth-child(3) p', 'tl2p'],
+        ['.tl-track .tl-item:nth-child(4) h4', 'tl3h'],
+        ['.tl-track .tl-item:nth-child(4) p', 'tl3p'],
+        ['.tl-track .tl-item:nth-child(5) h4', 'tl4h'],
+        ['.tl-track .tl-item:nth-child(5) p', 'tl4p'],
+        ['.tl-track .tl-item:nth-child(6) h4', 'tl5h'],
+        ['.tl-track .tl-item:nth-child(6) p', 'tl5p'],
+        ['.tl-track .tl-item:nth-child(7) h4', 'tl6h'],
+        ['.tl-track .tl-item:nth-child(7) p', 'tl6p'],
+        ['#team .section-tag', 'teamTag'],
+        ['#team .section-header h2', 'teamH2'],
+        ['#team .section-header p', 'teamP'],
+        ['#team .team-card:nth-child(1) .team-role', 'team1role'],
+        ['#team .team-card:nth-child(1) p', 'team1p'],
+        ['#team .team-card:nth-child(2) .team-role', 'team2role'],
+        ['#team .team-card:nth-child(2) p', 'team2p'],
+        ['#team .team-card:nth-child(3) .team-role', 'team3role'],
+        ['#team .team-card:nth-child(3) p', 'team3p'],
+        ['#cta h2', 'ctaH2'],
+        ['#cta > .container > p', 'ctaP'],
+        ['#cta .btn-primary', 'ctaBtn'],
+        ['#contact .section-tag', 'contactTag'],
+        ['#contact .section-header h2', 'contactH2'],
+        ['.contact-info h3', 'contactH3'],
+        ['.contact-info > p', 'contactP'],
+        ['.contact-info .contact-item:nth-child(3) h5', 'ciALabel'],
+        ['.contact-info .contact-item:nth-child(3) p', 'ciAVal'],
+        ['.contact-info .contact-item:nth-child(4) h5', 'ciPLabel'],
+        ['.contact-info .contact-item:nth-child(5) h5', 'ciELabel'],
+        ['.contact-info .contact-item:nth-child(6) h5', 'ciHLabel'],
+        ['.contact-info .contact-item:nth-child(6) p', 'ciHVal'],
+        ['.contact-form h4', 'formH4'],
+        ['.contact-form .form-sub', 'formSub'],
+        ['.contact-form .form-row:nth-child(3) .form-group:nth-child(1) label', 'labelName'],
+        ['.contact-form .form-row:nth-child(3) .form-group:nth-child(2) label', 'labelEmail'],
+        ['.contact-form .form-row:nth-child(4) .form-group:nth-child(1) label', 'labelPhone'],
+        ['.contact-form .form-row:nth-child(4) .form-group:nth-child(2) label', 'labelInquiry'],
+        ['.contact-form .form-group:nth-child(5) label', 'labelMsg'],
+        ['#contact-select', 'selectOpts'],
+        ['#formBtn', 'btnSubmit'],
+        ['.footer-brand p', 'footerBrandP'],
+        ['#footer-quick h5', 'footerQLinkH'],
+        ['#footer-quick a:nth-of-type(1)', 'fql1'],
+        ['#footer-quick a:nth-of-type(2)', 'fql2'],
+        ['#footer-quick a:nth-of-type(3)', 'fql3'],
+        ['#footer-quick a:nth-of-type(4)', 'fql4'],
+        ['#footer-quick a:nth-of-type(5)', 'fql5'],
+        ['#footer-quick a:nth-of-type(6)', 'fql6'],
+        ['#footer-divisions h5', 'footerDivH'],
+        ['#footer-divisions a:nth-of-type(1)', 'fdiv1'],
+        ['#footer-divisions a:nth-of-type(2)', 'fdiv2'],
+        ['#footer-divisions a:nth-of-type(3)', 'fdiv3'],
+        ['#footer-divisions a:nth-of-type(4)', 'fdiv4'],
+        ['#footer-contact-col h5', 'footerContactH'],
+        ['.footer-bottom p:nth-child(1)', 'footerB1'],
+        ['.footer-bottom p:nth-child(2)', 'footerB2'],
+        ['.wa-tooltip', 'waTooltip'],
+      ];
+
+      function setLang(lang) {
+        currentLang = lang;
+        const html = document.documentElement;
+        html.lang = lang;
+        html.dir = lang === 'ar' ? 'rtl' : 'ltr';
+        document.body.classList.toggle('lang-ar', lang === 'ar');
+        document.title = lang === 'ar' ? 'تقوى للتجارة والخدمات ذ.م.م' : 'Taqwa Trading and Services LLC';
+
+        MAP.forEach(([sel, key]) => {
+          const el = document.querySelector(sel);
+          if (el && T[lang][key] != null) el.innerHTML = T[lang][key];
+        });
+
+        // Placeholders
+        [['#name-input', 'phName'], ['#email-input', 'phEmail'], ['#contact-textarea', 'phMsg']].forEach(([sel, key]) => {
+          const el = document.querySelector(sel);
+          if (el && T[lang][key] != null) el.placeholder = T[lang][key];
+        });
+
+        // Toggle button states
+        document.querySelectorAll('.lang-btn').forEach(btn =>
+          btn.classList.toggle('active', btn.dataset.lang === lang)
+        );
+
+        localStorage.setItem('lang', lang);
+      }
+
+      // Init language on load
+      setLang(currentLang);
+
       // Preloader
       window.addEventListener("load", () => {
         setTimeout(
@@ -2884,10 +3403,10 @@
 
       // Form submit
       document.getElementById("formBtn").addEventListener("click", function () {
-        this.textContent = "✓ Message Sent Successfully";
+        this.innerHTML = T[currentLang].btnSent;
         this.style.background = "linear-gradient(135deg,#1a7a3a,#15632f)";
         setTimeout(() => {
-          this.textContent = "Send Message →";
+          this.innerHTML = T[currentLang].btnSubmit;
           this.style.background = "";
         }, 3000);
       });
